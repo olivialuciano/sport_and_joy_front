@@ -7,6 +7,7 @@ import "./App.css";
 import Home from "./components/Home/Home";
 import Signin from "./components/Singin/Signin";
 import Signup from "./components/Signup/Signup";
+import Dashboard from "./components/Dashboard/Dashboard";
 
 const App = () => {
   const router = createBrowserRouter([
@@ -22,6 +23,10 @@ const App = () => {
     {
       path: "/signup",
       element: <Signup />,
+    },
+    {
+      path: "/dashboard",
+      element: <Dashboard />,
     },
   ]);
 
