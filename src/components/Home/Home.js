@@ -12,7 +12,7 @@ const Home = () => {
   };
 
   return (
-    <div>
+    <div className="home-container">
       <h1 className="brand">Sport&Joy</h1>
       <h3 className="brand2">¡Reservar una cancha nunca fue tan fácil!</h3>
       <div className="button-div">
