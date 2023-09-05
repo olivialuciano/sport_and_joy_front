@@ -13,7 +13,7 @@ const Signin = () => {
 
   const navigate = useNavigate();
   const buttonNavigateSignin = () => {
-    navigate("/signin");
+    navigate("/signup");
   };
 
   const changeEmailHandler = (event) => {

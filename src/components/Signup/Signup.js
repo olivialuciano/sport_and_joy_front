@@ -15,7 +15,7 @@ const Signup = () => {
 
   const navigate = useNavigate();
   const buttonNavigateSignup = () => {
-    navigate("/signup");
+    navigate("/signin");
   };
 
   const changeNameHandler = (event) => {
