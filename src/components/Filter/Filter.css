@@ -1,0 +1,90 @@
+.filter-menu {
+  border-radius: 10px;
+  padding: 20px;
+  width: 18%;
+  height: 100vh;
+  display: inline-block;
+}
+
+.filter-section {
+  margin-top: 10px;
+}
+
+h3 {
+  margin: 0;
+  font-weight: bold;
+}
+
+label {
+  display: block;
+}
+
+input[type="checkbox"],
+input[type="radio"],
+input[type="number"] {
+  margin-top: 5px;
+}
+
+.apply-button {
+  background-color: #94c3dd;
+  color: #303030;
+  border: none;
+  border-radius: 5px;
+  padding: 5%;
+  width: 80%;
+  cursor: pointer;
+}
+
+.apply-button:hover {
+  background-color: #217dbb;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 2.6rem;
+  height: 1.3rem;
+}
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+  border-radius: 34px;
+}
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 1.2rem;
+  width: 1.2rem;
+  background-color: white;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+  border-radius: 50%;
+}
+input:checked + .slider {
+  background-color: #2196f3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(22px);
+  -ms-transform: translateX(22px);
+  transform: translateX(22px);
+}
+
+.numinput {
+  width: 3rem;
+}
+
+/* Ocultar las flechas de aumento y disminución en un campo de entrada de número */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  appearance: none;
+  margin: 0; /* Puedes ajustar este valor para personalizar el espaciado */
+}
