@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./Dashboard.css";
 import { Search } from "../Search/Search";
 import { Filter } from "../Filter/Filter";
@@ -18,9 +18,9 @@ const Dashboard = () => {
       .then((response) => response.json())
       .then((fieldData) => {
         const fieldsMapped = fieldsMapped.map((field) => ({
-          ...book,
+          ...field,
         }));
-        setFields(fieldsMaped);
+        setFields(fieldsMapped);
       })
       .catch((error) => {
         console.log(error);
