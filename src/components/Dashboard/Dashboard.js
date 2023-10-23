@@ -1,11 +1,32 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./Dashboard.css";
 import { Search } from "../Search/Search";
-import { Header } from "../Header/Header";
 import { Filter } from "../Filter/Filter";
 import { FieldCard } from "../FieldCard/FieldCard";
+import { Header } from "../Header/Header";
 
 const Dashboard = () => {
+  const [fields, setFields] = useState([]);
+  const BACKEND_URL = "http://localhost:8080";
+
+  useEffect(() => {
+    fetch(BACKEND_URL + "/field", {
+      headers: {
+        Accept: "application/json",
+      },
+    })
+      .then((response) => response.json())
+      .then((fieldData) => {
+        const fieldsMapped = fieldsMapped.map((field) => ({
+          ...book,
+        }));
+        setFields(fieldsMaped);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
   return (
     <>
       <Header />
