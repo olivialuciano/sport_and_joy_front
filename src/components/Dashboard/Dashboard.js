@@ -6,26 +6,26 @@ import { FieldCard } from "../FieldCard/FieldCard";
 import { Header } from "../Header/Header";
 
 const Dashboard = () => {
-  const [fields, setFields] = useState([]);
-  const BACKEND_URL = "http://localhost:8080";
+  //const [fields, setFields] = useState([]);
+  //const BACKEND_URL = "http://localhost:8080";
 
-  useEffect(() => {
-    fetch(BACKEND_URL + "/field", {
-      headers: {
-        Accept: "application/json",
-      },
-    })
-      .then((response) => response.json())
-      .then((fieldData) => {
-        const fieldsMapped = fieldsMapped.map((field) => ({
-          ...field,
-        }));
-        setFields(fieldsMapped);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, []);
+  // useEffect(() => {
+  //   fetch(BACKEND_URL + "/field", {
+  //     headers: {
+  //       Accept: "application/json",
+  //     },
+  //   })
+  //     .then((response) => response.json())
+  //     .then((fieldData) => {
+  //       const fieldsMapped = fieldsMapped.map((field) => ({
+  //         ...field,
+  //       }));
+  //       setFields(fieldsMapped);
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //     });
+  // }, []);
 
   return (
     <>
