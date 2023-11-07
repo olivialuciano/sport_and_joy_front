@@ -31,7 +31,7 @@ const Profile = () => {
       <Header />
       <div className="perfil-container">
         <div className="perfil-header">
-          <h1>Perfil de Usuario</h1>
+          <h1>Mi perfil</h1>
         </div>
         <div className="perfil-datos">
           {isEditing ? (

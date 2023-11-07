@@ -1,41 +1,49 @@
 .perfil-container {
-  max-width: 400px;
-  margin: 0 auto;
-  padding: 20px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  background-color: #fff;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  margin-top: 3rem;
+  padding: 0;
+  width: 18%;
+  display: block; /* Cambiar a bloque en lugar de inline-block */
+  max-width: none;
+  margin: 0 auto; /* Centrar horizontalmente utilizando margen auto */
+  border: none;
+  background-color: transparent;
+  box-shadow: none;
 }
 
 .perfil-header {
-  text-align: center;
-  margin-bottom: 20px;
+  margin-top: 10px; /* Cambiar margin-bottom a margin-top */
+  text-align: left; /* Cambiar el texto a la izquierda si es necesario */
 }
 
 .perfil-datos {
-  display: flex;
-  flex-direction: column;
+  margin-top: 10px; /* Cambiar margin-bottom a margin-top */
+  display: block; /* Cambiar a bloque en lugar de flex */
+}
 
-  label {
-    font-weight: bold;
-    margin-bottom: 5px;
-  }
+.perfil-datos label {
+  display: block; /* Asegurarse de que los labels sean bloques */
+  font-weight: bold;
+  margin: 5px 0; /* Cambiar margin-bottom a un margen vertical */
+}
 
-  input,
-  span {
-    margin-bottom: 10px;
-    padding: 5px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-  }
+.perfil-datos input,
+.perfil-datos span {
+  margin: 5px 0; /* Cambiar margin-bottom a un margen vertical */
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
 
-  button {
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    padding: 10px;
-    cursor: pointer;
-  }
+.perfil-datos button {
+  background-color: #94c3dd;
+  color: #303030;
+  border: none;
+  border-radius: 5px;
+  padding: 5%;
+  width: 80%;
+  cursor: pointer;
+}
+
+.perfil-datos button:hover {
+  background-color: #217dbb;
 }
