@@ -1,0 +1,12 @@
+.container {
+  display: flex;
+}
+
+.filter {
+  flex: 1; /* Esto hará que ocupe el espacio necesario a la izquierda */
+}
+
+.flex-fields {
+  display: flex;
+  flex-wrap: wrap;
+}

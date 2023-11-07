@@ -13,7 +13,7 @@ const Signin = () => {
 
   const navigate = useNavigate();
   const buttonNavigateSignin = () => {
-    navigate("/signin");
+    navigate("/signup");
   };
 
   const changeEmailHandler = (event) => {
@@ -58,7 +58,7 @@ const Signin = () => {
 
   return (
     <div className="signin-container">
-      <h2>Ingresa a tu cuenta</h2>
+      <h2>Ingresá a tu cuenta</h2>
       <div className="input-container">
         <label className="label">Mail</label>
         <input
@@ -86,7 +86,7 @@ const Signin = () => {
       <button className="signin-button" type="button" onClick={signInHandler}>
         Ingresar
       </button>
-      <p onClick={buttonNavigateSignin}>¿No tienes una cuenta? ¡Regístrate!</p>
+      <p onClick={buttonNavigateSignin}>¿No tenés una cuenta? ¡Registrate!</p>
     </div>
   );
 };
