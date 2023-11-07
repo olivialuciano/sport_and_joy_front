@@ -12,10 +12,13 @@ export const Header = () => {
   const buttonNavigateReservations = () => {
     navigate("/reservations");
   };
+  const navigateDashboard = () => {
+    navigate("/dashboard");
+  };
 
   return (
     <div className="header">
-      <h1>Sport&Joy</h1>
+      <h1 onClick={navigateDashboard}>Sport&Joy</h1>
       <div className="dropdown">
         <div className="user">
           <img className="user-picture" src={avatarImage} alt="avatar" />
