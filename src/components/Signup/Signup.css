@@ -39,3 +39,21 @@
 .signin-button:hover {
   background-color: #0056b3;
 }
+
+/* Resaltar en rojo los campos con errores */
+.input.error {
+  border: 2px solid red; /* Cambia el grosor y el color del borde */
+}
+
+.error-message {
+  color: red; /* Cambia el color del mensaje de error */
+}
+
+/* Resaltar en rojo los campos vacíos */
+.input.error.empty {
+  border: 2px solid red; /* Cambia el grosor y el color del borde */
+}
+
+.error-message.empty {
+  color: red; /* Cambia el color del mensaje de error */
+}

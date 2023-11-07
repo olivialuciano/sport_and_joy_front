@@ -1,5 +1,5 @@
-import React from "react";
-import { useRef, useState } from "react";
+import React, { useState } from "react";
+import { useRef } from "react";
 import { useNavigate } from "react-router";
 import "./Signup.css";
 
@@ -7,7 +7,9 @@ const Signup = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [register, setRegister] = useState(false);
+  const [nameError, setNameError] = useState(false);
+  const [emailError, setEmailError] = useState(false);
+  const [passwordError, setPasswordError] = useState(false);
 
   const nameRef = useRef(null);
   const emailRef = useRef(null);
@@ -18,59 +20,37 @@ const Signup = () => {
     navigate("/signin");
   };
 
-  const changeNameHandler = (event) => {
-    if (event.target.value === "") {
-      emailRef.current.style.borderColor = "red";
-      emailRef.current.style.outline = "none";
-    } else {
-      emailRef.current.style.borderColor = "";
-      emailRef.current.style.outline = "";
-    }
-    setName(event.target.value);
+  const validateName = () => {
+    setNameError(name.trim() === "");
   };
 
-  const changeEmailHandler = (event) => {
-    if (event.target.value === "") {
-      emailRef.current.style.borderColor = "red";
-      emailRef.current.style.outline = "none";
-    } else {
-      emailRef.current.style.borderColor = "";
-      emailRef.current.style.outline = "";
-    }
-    setEmail(event.target.value);
+  const validateEmail = () => {
+    const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+    setEmailError(!emailPattern.test(email));
   };
 
-  const changePasswordHandler = (event) => {
-    if (event.target.value === "") {
-      passwordRef.current.style.borderColor = "red";
-      passwordRef.current.style.outline = "none";
-    } else {
-      passwordRef.current.style.borderColor = "";
-      passwordRef.current.style.outline = "";
-    }
-    setPassword(event.target.value);
+  const validatePassword = () => {
+    setPasswordError(password.length < 6);
   };
+
   const signUpHandler = () => {
-    setRegister(true);
+    validateName();
+    validateEmail();
+    validatePassword();
 
-    if (name === "") {
-      nameRef.current.focus();
-      nameRef.current.style.borderColor = "red";
-      nameRef.current.style.outline = "none";
+    if (nameError || emailError || passwordError) {
       return;
     }
-    if (email === "") {
-      emailRef.current.focus();
-      emailRef.current.style.borderColor = "red";
-      emailRef.current.style.outline = "none";
+
+    if (name === "" || email === "" || password === "") {
+      // Si algún campo está vacío, muestra el mensaje de error
+      setNameError(true);
+      setEmailError(true);
+      setPasswordError(true);
       return;
     }
-    if (password === "") {
-      passwordRef.current.focus();
-      passwordRef.current.style.borderColor = "orange";
-      passwordRef.current.style.outline = "none";
-      return;
-    }
+
+    // Tu lógica de registro aquí
     navigate("/dashboard");
   };
 
@@ -80,45 +60,46 @@ const Signup = () => {
       <div className="input-container">
         <label className="label">Nombre</label>
         <input
-          className="input"
+          className={`input ${nameError ? "error" : ""}`}
           placeholder=""
           type="text"
           ref={nameRef}
           value={name}
-          onChange={changeNameHandler}
+          onChange={(e) => setName(e.target.value)}
+          onBlur={validateName}
         />
+        {nameError && <p className="error-message">Ingrese su nombre</p>}
       </div>
-      {register && email === "" && <p>Ingrese su nombre</p>}
       <div className="input-container">
         <label className="label">Mail</label>
         <input
-          className="input"
+          className={`input ${emailError ? "error" : ""}`}
           placeholder=""
           type="email"
           ref={emailRef}
           value={email}
-          onChange={changeEmailHandler}
+          onChange={(e) => setEmail(e.target.value)}
+          onBlur={validateEmail}
         />
+        {emailError && <p className="error-message">Ingrese un correo electrónico válido</p>}
       </div>
-      {register && email === "" && <p>Ingrese un correo electrónico válido</p>}
       <div className="input-container">
         <label className="label">Contraseña</label>
         <input
-          className="input"
+          className={`input ${passwordError ? "error" : ""}`}
           placeholder=""
           type="password"
           ref={passwordRef}
           value={password}
-          onChange={changePasswordHandler}
+          onChange={(e) => setPassword(e.target.value)}
+          onBlur={validatePassword}
         />
+        {passwordError && <p className="error-message">La contraseña debe tener al menos 6 caracteres</p>}
       </div>
-      {register && password === "" && <p>Ingrese una contraseña válida</p>}
       <button className="signin-button" type="button" onClick={signUpHandler}>
         Registrarse
       </button>
-      <p onClick={buttonNavigateSignup}>
-        ¿Ya tenés una cuenta? ¡Iniciá Sesión!
-      </p>
+      <p onClick={buttonNavigateSignup}>¿Ya tenés una cuenta? ¡Iniciá Sesión!</p>
     </div>
   );
 };
