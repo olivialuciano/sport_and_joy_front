@@ -12,22 +12,26 @@ export const Header = () => {
   const buttonNavigateReservations = () => {
     navigate("/reservations");
   };
+  const buttonNavigateUsers = () => {
+    navigate("/users");
+  };
   const navigateDashboard = () => {
     navigate("/dashboard");
   };
 
   return (
     <div className="header">
-      <h1 onClick={navigateDashboard}>Sport&Joy</h1>
+      <button className="title-button" onClick={navigateDashboard}>Sport&Joy</button>
       <div className="dropdown">
         <div className="user">
           <img className="user-picture" src={avatarImage} alt="avatar" />
-          <p className="user-name">Olivia</p>
+          <button className="user-button">Olivia</button>
         </div>
         <div className="dropdown-content">
-          <p onClick={buttonNavigateProfile}>Perfil</p>
-          <p onClick={buttonNavigateReservations}>Reservas</p>
-          <p>Cerrar sesión</p>
+          <button className="dropdown-buttons" onClick={buttonNavigateProfile}>Perfil</button>
+          <button className="dropdown-buttons" onClick={buttonNavigateReservations}>Reservas</button>
+          <button className="dropdown-buttons" onClick={buttonNavigateUsers}>Usuarios Activos</button>
+          <button className="dropdown-buttons">Cerrar sesión</button>
         </div>
       </div>
     </div>

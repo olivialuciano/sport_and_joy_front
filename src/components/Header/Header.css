@@ -30,10 +30,12 @@ h1 {
   margin-right: 10%;
 }
 
+
+/* el user button cumple la misma función
 .user-name {
   margin: 0;
   margin-right: 1rem;
-}
+}*/
 
 .dropdown-content {
   display: none;
@@ -45,6 +47,32 @@ h1 {
   padding: 0.5rem;
   z-index: 1;
   width: 6rem;
+}
+
+.dropdown-buttons {
+  background-color: white;
+  color: black;
+  border: none;
+}
+
+.dropdown-buttons:hover{
+  background-color: #008CBA;
+  color: white;
+}
+
+.title-button{
+  background-color: #94c3dd;
+  color: white;
+  border: None;
+  font-size: xx-large;
+}
+
+.user-button{
+  background-color: #94c3dd;
+  color: black;
+  border: None;
+  font-size: medium;
+
 }
 
 .dropdown:hover .dropdown-content {

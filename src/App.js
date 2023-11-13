@@ -12,6 +12,7 @@ import { useContext } from "react";
 import Profile from "./components/Profile/Profile";
 import Reservations from "./components/Reservations/Reservations";
 import FieldDetail from "./components/FieldDetail/FieldDetail";
+import Users from "./components/Users/Users";
 
 const App = () => {
   const router = createBrowserRouter([
@@ -40,6 +41,11 @@ const App = () => {
       path: "/fieldDetail",
       element: <FieldDetail />,
     },
+    {
+      path: "/users",
+      element: <Users />,
+    },
+
   ]);
 
   return (
