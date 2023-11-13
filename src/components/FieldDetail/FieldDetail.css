@@ -1,40 +1,4 @@
-/* .field-detail.field-card {
-    display: flex;
-    border: 1px solid #ccc;
-    padding: 20px;
-    margin: 10px;
-    width: 1000px;
-  }
-  
-  .field-image {
-    max-width: 200px;
-    max-height: 150px;
-    margin-right: 20px;
-  }
-  
-  .field-info {
-    flex: 1;
-  }
-  
-  h2 {
-    font-size: 24px;
-    margin: 10px 0;
-  }
-  
-  p {
-    font-size: 16px;
-  }
-  
-  strong {
-    font-weight: bold;
-  }
-  
-  .field-price {
-    font-size: 20px;
-    margin-top: 10px;
-  }
-  
-   */
+
 
    .field-detail.field-card {
     display: flex;
