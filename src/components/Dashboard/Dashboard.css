@@ -9,4 +9,26 @@
 .flex-fields {
   display: flex;
   flex-wrap: wrap;
+  justify-content: space-between; /* Distribuir las tarjetas uniformemente */
+}
+
+.field-card {
+  width: 300px; /* Ajusta el ancho de las tarjetas según tus necesidades */
+  height: 400px; /* Ajusta la altura de las tarjetas según tus necesidades */
+  border: 1px solid #ccc;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  background-color: #ffffff;
+  color: #333333;
+  margin-bottom: 20px; /* Espacio entre tarjetas */
+}
+
+.field-card h2 {
+  font-size: 24px;
+  color: #0077b6;
+}
+
+.field-card p {
+  font-size: 16px;
+  color: #333333;
 }

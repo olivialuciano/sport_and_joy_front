@@ -4,6 +4,8 @@ import { Search } from "../Search/Search";
 import { Filter } from "../Filter/Filter";
 import { FieldCard } from "../FieldCard/FieldCard";
 import { Header } from "../Header/Header";
+import FieldDetail from "../FieldDetail/FieldDetail";
+
 
 const Dashboard = () => {
   //const [fields, setFields] = useState([]);
@@ -45,6 +47,7 @@ const Dashboard = () => {
           <FieldCard />
           <FieldCard />
         </div>
+
       </div>
     </>
   );

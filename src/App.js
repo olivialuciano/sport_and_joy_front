@@ -11,6 +11,7 @@ import Dashboard from "./components/Dashboard/Dashboard";
 import { useContext } from "react";
 import Profile from "./components/Profile/Profile";
 import Reservations from "./components/Reservations/Reservations";
+import FieldDetail from "./components/FieldDetail/FieldDetail";
 
 const App = () => {
   const router = createBrowserRouter([
@@ -34,6 +35,10 @@ const App = () => {
     {
       path: "/reservations",
       element: <Reservations />,
+    },
+    {
+      path: "/fieldDetail",
+      element: <FieldDetail />,
     },
   ]);
 
