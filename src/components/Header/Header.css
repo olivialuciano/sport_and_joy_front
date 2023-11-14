@@ -78,3 +78,46 @@ h1 {
 .dropdown:hover .dropdown-content {
   display: block;
 }
+/* todo esto es para la animacion y cambio de cursor de un boton */
+
+
+.adminView-button{
+  display: flex;
+  position: absolute;
+  top: 15px;   /* Puedes ajustar este valor según sea necesario */
+  left: 190px;  /* Puedes ajustar este valor según sea necesario */
+  border-radius: 50px;
+  background-color:red;
+  border: none;
+  color: #FFFFFF;
+  text-align: center;
+  font-size: 28px;
+  transition: all 0.5s;
+  width: auto;
+  cursor: pointer;
+}
+
+.adminView-button span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.adminView-button span:after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.adminView-button:hover span {
+  padding-right: 25px;
+}
+
+.adminView-button:hover span:after {
+  opacity: 1;
+  right: 0;
+}

@@ -12,16 +12,23 @@ export const Header = () => {
   const buttonNavigateReservations = () => {
     navigate("/reservations");
   };
-  const buttonNavigateUsers = () => {
-    navigate("/users");
+  const buttonNavigateAdminView = () => {
+    navigate("/adminview");
   };
+ /* const buttonNavigateUsers = () => {
+    navigate("/users");
+};*/
   const navigateDashboard = () => {
     navigate("/dashboard");
   };
 
   return (
     <div className="header">
+
       <button className="title-button" onClick={navigateDashboard}>Sport&Joy</button>
+      <div className="adminView">
+        <button className="adminView-button" onClick={buttonNavigateAdminView}><span>AdminView</span></button>
+      </div>
       <div className="dropdown">
         <div className="user">
           <img className="user-picture" src={avatarImage} alt="avatar" />
@@ -30,7 +37,6 @@ export const Header = () => {
         <div className="dropdown-content">
           <button className="dropdown-buttons" onClick={buttonNavigateProfile}>Perfil</button>
           <button className="dropdown-buttons" onClick={buttonNavigateReservations}>Reservas</button>
-          <button className="dropdown-buttons" onClick={buttonNavigateUsers}>Usuarios Activos</button>
           <button className="dropdown-buttons">Cerrar sesión</button>
         </div>
       </div>
