@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from "react";
+
+import React from "react";
 import "./Dashboard.css";
+import FieldCard from "../FieldCard/FieldCard";
+import { Header } from "../Header/Header";
 import { Search } from "../Search/Search";
 import { Filter } from "../Filter/Filter";
-import { FieldCard } from "../FieldCard/FieldCard";
-import { Header } from "../Header/Header";
-import FieldDetail from "../FieldDetail/FieldDetail";
-
 
 const Dashboard = () => {
   //const [fields, setFields] = useState([]);
@@ -28,6 +27,23 @@ const Dashboard = () => {
   //       console.log(error);
   //     });
   // }, []);
+  const canchas = [
+    {
+      id: 1,
+      nombre: 'Cancha 1',
+      ubicacion: 'Ubicación 1',
+      precio: '$20/hora',
+      imagen: 'https://via.placeholder.com/150',
+    },
+    {
+      id: 2,
+      nombre: 'Cancha 2',
+      ubicacion: 'Ubicación 2',
+      precio: '$25/hora',
+      imagen: 'https://via.placeholder.com/150',
+    },
+    // Agrega más canchas según sea necesario
+  ];
 
   return (
     <>
@@ -38,19 +54,34 @@ const Dashboard = () => {
           <Filter />
         </div>
         <div className="flex-fields">
-          <FieldCard />
-          <FieldCard />
-          <FieldCard />
-          <FieldCard />
-          <FieldCard />
-          <FieldCard />
-          <FieldCard />
-          <FieldCard />
+          {canchas.map((cancha) => (
+            <FieldCard key={cancha.id} cancha={cancha} />
+          ))}
         </div>
-
       </div>
     </>
   );
 };
-// no aparece el search, no se xq si lo hice como un context, es solo un imut para buscar...
+
 export default Dashboard;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
