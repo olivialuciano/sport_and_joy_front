@@ -14,8 +14,10 @@ import Reservations from "./components/Reservations/Reservations";
 import FieldDetail from "./components/FieldDetail/FieldDetail";
 import Users from "./components/Users/Users";
 import AdminView from "./components/AdminView/AdminView";
+import { UserProvider, useUser } from "./services/Authentication/authentication.context";
 
 const App = () => {
+  const { user } = useUser();
   const router = createBrowserRouter([
     { path: "/", element: <Navigate to="/signin" /> },
     {
@@ -28,7 +30,7 @@ const App = () => {
     },
     {
       path: "/dashboard",
-      element: <Dashboard />,
+      element: user.role === "player" ? <Dashboard /> : <Navigate to="/adminView" />,
     },
     {
       path: "/profile",
@@ -39,7 +41,7 @@ const App = () => {
       element: <Reservations />,
     },
     {
-      path: "/fieldDetail",
+      path: "/fieldDetail/:id",
       element: <FieldDetail />,
     },
     {
@@ -50,13 +52,17 @@ const App = () => {
       path: "/adminView",
       element: <AdminView />, 
     },
+    // {
+    //   path: "/admin",
+    //   element: user.role === "admin" ? <AdminView /> : <Navigate to="/dashboard" />,
+    // },
 
   ]);
 
   return (
-    <>
+    <UserProvider>
       <RouterProvider router={router} />
-    </>
+    </UserProvider>
   );
 };
 

@@ -4,6 +4,7 @@
 import React, { useState } from "react";
 import "./FieldDetail.css";
 import { Header } from "../Header/Header";
+import { useNavigate, useParams } from "react-router-dom";
 
 const FieldDetail = (props) => {
   const {
@@ -16,6 +17,9 @@ const FieldDetail = (props) => {
     bar,
     price,
   } = props;
+
+  const { id } = useParams();
+  const navigate = useNavigate();
 
   const [showConfirmation, setShowConfirmation] = useState(false);
 
@@ -33,31 +37,71 @@ const FieldDetail = (props) => {
   };
 
   return (
+    // <>
+    // <Header />
+    // <div className="field-detail field-card">
+    //   <img src={image} alt={name} className="field-image" />
+    //   <div className="field-info">
+    //     <h2> "Fulbito" {name}</h2>
+    //     <img src="https://lh3.googleusercontent.com/p/AF1QipMxtsQ0kqDdux6pRQCFKd61np6gDpx44KFx4UTq=w1080-h608-p-no-v0" alt="foto cancha"/>
+    //     <p><strong>Ubicación: "Sarmiento 5667"</strong> {location}</p>
+    //     <p><strong>Descripción: "cancha f5"</strong> {description}</p>
+    //     <p><strong>Deporte: "Futbol"</strong> {sport}</p>
+    //     <p><strong>Vestuarios: {true} </strong> {lockerRoom ? "Sí" : "No"}</p>
+    //     <p><strong>Bar: {false}</strong> {bar ? "Sí" : "No"}</p>
+    //     <p><strong>Precio: {30}</strong> {price} USD</p>
+    //     <button className="reserve-button" onClick={handleReserveClick}>Reservar</button>
+    //   </div>
+
+    //   {showConfirmation && (
+    //     <div className="popup">
+    //       <p>¿Seguro que desea reservar?</p>
+    //       <button onClick={handleConfirmReservation}>Sí</button>
+    //       <button onClick={handleCancelReservation}>No</button>
+    //     </div>
+    //   )}
+    // </div>
+    // </>
     <>
     <Header />
     <div className="field-detail field-card">
       <img src={image} alt={name} className="field-image" />
       <div className="field-info">
         <h2> "Fulbito" {name}</h2>
-        <img src="https://lh3.googleusercontent.com/p/AF1QipMxtsQ0kqDdux6pRQCFKd61np6gDpx44KFx4UTq=w1080-h608-p-no-v0" alt="foto cancha"/>
-        <p><strong>Ubicación: "Sarmiento 5667"</strong> {location}</p>
-        <p><strong>Descripción: "cancha f5"</strong> {description}</p>
-        <p><strong>Deporte: "Futbol"</strong> {sport}</p>
-        <p><strong>Vestuarios: {true} </strong> {lockerRoom ? "Sí" : "No"}</p>
-        <p><strong>Bar: {false}</strong> {bar ? "Sí" : "No"}</p>
-        <p><strong>Precio: {30}</strong> {price} USD</p>
-        <button onClick={handleReserveClick}>Reservar</button>
+        <p>
+          <strong>Ubicación: "Sarmiento 5667"</strong> {location}
+        </p>
+        <p>
+          <strong>Descripción: "cancha f5"</strong> {description}
+        </p>
+        <p>
+          <strong>Deporte: "Futbol"</strong> {sport}
+        </p>
+        <p>
+          <strong>Vestuarios: {true} </strong>{" "}
+          {lockerRoom ? "Sí" : "No"}
+        </p>
+        <p>
+          <strong>Bar: {false}</strong> {bar ? "Sí" : "No"}
+        </p>
+        <p>
+          <strong>Precio: {30}</strong> {price} USD
+        </p>
       </div>
-
-      {showConfirmation && (
-        <div className="popup">
-          <p>¿Seguro que desea reservar?</p>
-          <button onClick={handleConfirmReservation}>Sí</button>
-          <button onClick={handleCancelReservation}>No</button>
-        </div>
-      )}
+      <div className="button-container">
+        <button className="reserve-button" onClick={handleReserveClick}>
+          Reservar
+        </button>
+        {showConfirmation && (
+          <div className="popup">
+            <p>¿Seguro que desea reservar?</p>
+            <button onClick={handleConfirmReservation}>Sí</button>
+            <button onClick={handleCancelReservation}>No</button>
+          </div>
+        )}
+      </div>
     </div>
-    </>
+  </>
   );
 };
 
