@@ -1,32 +1,31 @@
 
 
-   .field-detail.field-card {
+  /* .field-detail {
     display: flex;
-    border: 1px solid #ccc;
-    padding: 20px;
-    margin: 10px;
-    width: 1000px; /* Ancho deseado */
+    flex-direction: column;
+    align-items: center;
+    margin-top: 50px;
+    width: 100%;
   }
   
   .field-image {
     max-width: 100%;
-    max-height: 150px;
-    margin-right: 20px;
+    max-height: 400px;
+    margin-bottom: 20px;
   }
   
   .field-info {
-    flex: 1;
+    text-align: center;
   }
   
   h2 {
     font-size: 24px;
     margin: 10px 0;
-    word-wrap: break-word; /* Ajusta el texto al ancho de la tarjeta sin puntos suspensivos */
   }
   
   p {
     font-size: 16px;
-    word-wrap: break-word; /* Ajusta el texto al ancho de la tarjeta sin puntos suspensivos */
+    margin-bottom: 10px;
   }
   
   strong {
@@ -38,10 +37,8 @@
     margin-top: 10px;
   }
   
-  /* ... Estilos anteriores ... */
-
-.popup {
-    position: absolute;
+  .popup {
+    position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -52,5 +49,103 @@
     text-align: center;
   }
   
-  /* ... Estilos adicionales ... */
+  .button-container {
+    margin-top: 20px;
+    text-align: center;
+  }
+  
+  .reserve-button {
+    font-size: 24px;
+    padding: 15px 30px;
+    background-color: #0077b6;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+  }
+  
+  .reserve-button:hover {
+    background-color: #005678;
+  }
+  
+  .field-detail:hover {
+    transform: scale(1);
+  }
+  
+  
+NUEVO */
+   
+
+.field-detail {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 50px;
+  width: 100%;
+}
+
+.field-image {
+  max-width: 100%;
+  max-height: 400px;
+  margin-bottom: 20px;
+}
+
+.field-info {
+  text-align: center;
+}
+
+h2 {
+  font-size: 24px;
+  margin: 10px 0;
+}
+
+p {
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+strong {
+  font-weight: bold;
+}
+
+.field-price {
+  font-size: 20px;
+  margin-top: 10px;
+}
+
+.popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  border: 1px solid #ccc;
+  padding: 20px;
+  z-index: 1000;
+  text-align: center;
+}
+
+.button-container {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.reserve-button {
+  font-size: 24px;
+  padding: 15px 30px;
+  background-color: #0077b6;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.reserve-button:hover {
+  background-color: #005678;
+}
+
+.field-detail:hover {
+  transform: scale(1);
+}
+
   

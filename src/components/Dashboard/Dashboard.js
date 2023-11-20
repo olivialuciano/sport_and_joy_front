@@ -1,10 +1,11 @@
 
-import React from "react";
+import React, { useState } from "react";
 import "./Dashboard.css";
 import FieldCard from "../FieldCard/FieldCard";
 import { Header } from "../Header/Header";
 import { Search } from "../Search/Search";
 import { Filter } from "../Filter/Filter";
+import { useNavigate } from "react-router-dom";
 
 const Dashboard = () => {
   //const [fields, setFields] = useState([]);
@@ -27,6 +28,9 @@ const Dashboard = () => {
   //       console.log(error);
   //     });
   // }, []);
+  
+  const [selectedCancha,setSelectedCancha] = useState(null);
+  const navigate = useNavigate();
   const canchas = [
     {
       id: 1,
@@ -45,6 +49,11 @@ const Dashboard = () => {
     // Agrega más canchas según sea necesario
   ];
 
+  const handleCardClick = (cancha) => {
+    setSelectedCancha(cancha);
+    navigate(`/fieldDetail/${cancha.id}`);
+  };
+
   return (
     <>
       <Header />
@@ -55,7 +64,7 @@ const Dashboard = () => {
         </div>
         <div className="flex-fields">
           {canchas.map((cancha) => (
-            <FieldCard key={cancha.id} cancha={cancha} />
+            <FieldCard key={cancha.id} cancha={cancha} onCardClick={handleCardClick}/>
           ))}
         </div>
       </div>

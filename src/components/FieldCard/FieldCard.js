@@ -1,9 +1,12 @@
 import React from "react";
 import "./FieldCard.css";
 
-const FieldCard = ({ cancha }) => {
+const FieldCard = ({ cancha, onCardClick }) => {
+  const handleCardClick = () => {
+    onCardClick(cancha);
+  }
   return (
-    <div className="tarjeta">
+    <div className="tarjeta" onClick={handleCardClick}>
       <img className="imagen-cancha" src={cancha.imagen} alt={cancha.nombre} />
       <div className="info-cancha">
         <h2>{cancha.nombre}</h2>
