@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import "./Dashboard.css";
 import FieldCard from "../FieldCard/FieldCard";
@@ -29,53 +28,96 @@ const Dashboard = () => {
   //       console.log(error);
   //     });
   // }, []);
-  
-  const [selectedCancha,setSelectedCancha] = useState(null);
-  const { user } = useUser(); 
+
+  const [selectedCancha, setSelectedCancha] = useState(null);
+  const { user } = useUser();
   const navigate = useNavigate();
   const canchas = [
     {
       id: 1,
-      nombre: 'Cancha 1',
-      ubicacion: 'Ubicación 1',
-      precio: '$20/hora',
-      imagen: 'https://via.placeholder.com/150',
+      nombre: "Cancha 1",
+      ubicacion: "Ubicación 1",
+      precio: "$20/hora",
+      imagen: "https://via.placeholder.com/150",
     },
     {
       id: 2,
-      nombre: 'Cancha 2',
-      ubicacion: 'Ubicación 2',
-      precio: '$25/hora',
-      imagen: 'https://via.placeholder.com/150',
+      nombre: "Cancha 2",
+      ubicacion: "Ubicación 2",
+      precio: "$25/hora",
+      imagen: "https://via.placeholder.com/150",
     },
     {
       id: 2,
-      nombre: 'Cancha 2',
-      ubicacion: 'Ubicación 2',
-      precio: '$25/hora',
-      imagen: 'https://via.placeholder.com/150',
+      nombre: "Cancha 2",
+      ubicacion: "Ubicación 2",
+      precio: "$25/hora",
+      imagen: "https://via.placeholder.com/150",
     },
     {
       id: 2,
-      nombre: 'Cancha 2',
-      ubicacion: 'Ubicación 2',
-      precio: '$25/hora',
-      imagen: 'https://via.placeholder.com/150',
+      nombre: "Cancha 2",
+      ubicacion: "Ubicación 2",
+      precio: "$25/hora",
+      imagen: "https://via.placeholder.com/150",
     },
     {
       id: 2,
-      nombre: 'Cancha 2',
-      ubicacion: 'Ubicación 2',
-      precio: '$25/hora',
-      imagen: 'https://via.placeholder.com/150',
+      nombre: "Cancha 2",
+      ubicacion: "Ubicación 2",
+      precio: "$25/hora",
+      imagen: "https://via.placeholder.com/150",
     },
     {
       id: 2,
-      nombre: 'Cancha 2',
-      ubicacion: 'Ubicación 2',
-      precio: '$25/hora',
-      imagen: 'https://via.placeholder.com/150',
+      nombre: "Cancha 2",
+      ubicacion: "Ubicación 2",
+      precio: "$25/hora",
+      imagen: "https://via.placeholder.com/150",
     },
+    {
+      id: 2,
+      nombre: "Cancha 2",
+      ubicacion: "Ubicación 2",
+      precio: "$25/hora",
+      imagen: "https://via.placeholder.com/150",
+    },
+    {
+      id: 2,
+      nombre: "Cancha 2",
+      ubicacion: "Ubicación 2",
+      precio: "$25/hora",
+      imagen: "https://via.placeholder.com/150",
+    },
+    {
+      id: 2,
+      nombre: "Cancha 2",
+      ubicacion: "Ubicación 2",
+      precio: "$25/hora",
+      imagen: "https://via.placeholder.com/150",
+    },
+    {
+      id: 2,
+      nombre: "Cancha 2",
+      ubicacion: "Ubicación 2",
+      precio: "$25/hora",
+      imagen: "https://via.placeholder.com/150",
+    },
+    {
+      id: 2,
+      nombre: "Cancha 2",
+      ubicacion: "Ubicación 2",
+      precio: "$25/hora",
+      imagen: "https://via.placeholder.com/150",
+    },
+    {
+      id: 2,
+      nombre: "Cancha 2",
+      ubicacion: "Ubicación 2",
+      precio: "$25/hora",
+      imagen: "https://via.placeholder.com/150",
+    },
+
     // Agrega más canchas según sea necesario
   ];
 
@@ -99,19 +141,39 @@ const Dashboard = () => {
     //     </div>
     //   </div>
     // </>
+    // <>
+    //   <Header />
+    //   <Search />
+    //   <div className="container">
+    //     {user.role !== 'owner' && (
+    //       <div className="filter">
+    //         <Filter />
+    //       </div>
+    //     )}
+    //     <div className="flex-fields">
+    //       {canchas.map((cancha) => (
+    //         <FieldCard key={cancha.id} cancha={cancha} onCardClick={handleCardClick} />
+    //       ))}
+    //     </div>
+    //   </div>
+    // </>
     <>
       <Header />
-      <Search />
-      <div className="container">
-        {user.role !== 'owner' && (
-          <div className="filter">
-            <Filter />
+      <div className="dashboard-container">
+        <div className="top-bar">
+          {user.role !== "owner" && user.role !== "admin" && <Filter />}
+        </div>
+        <div className="dashboard-right">
+          <Search />
+          <div className="flex-fields">
+            {canchas.map((cancha) => (
+              <FieldCard
+                key={cancha.id}
+                cancha={cancha}
+                onCardClick={handleCardClick}
+              />
+            ))}
           </div>
-        )}
-        <div className="flex-fields">
-          {canchas.map((cancha) => (
-            <FieldCard key={cancha.id} cancha={cancha} onCardClick={handleCardClick} />
-          ))}
         </div>
       </div>
     </>
@@ -119,24 +181,3 @@ const Dashboard = () => {
 };
 
 export default Dashboard;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  

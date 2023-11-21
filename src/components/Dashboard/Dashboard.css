@@ -1,13 +1,32 @@
 /* Dashboard.css */
+.dashboard-container {
+  display: flex;
+  flex-direction: row;
+  /*align-items: center;*/
+}
+.dashboard-right {
+}
+.top-bar {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
 
+.flex-fields {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  width: 100%;
+}
+/* /* 
 .container {
   display: flex;
-  margin: 20px; /* Agregar margen alrededor del contenedor */
+  margin: 20px; /* Agregar margen alrededor del contenedor 
 }
 
 .filter {
-  flex: 1;
-  margin-right: 20px; /* Añadir margen a la derecha del filtro */
+  flex:  0;
+  margin-right: 10px; /* Añadir margen a la derecha del filtro 
 }
 
 .flex-fields {
@@ -19,29 +38,29 @@
 .field-card {
   width: 300px;
   height: 400px;
-  border: 1px solid #e1e1e1; /* Utilizar un color más suave para el borde */
+  border: 1px solid #e1e1e1; /* Utilizar un color más suave para el borde 
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   padding: 20px;
   background-color: #ffffff;
   color: #333333;
   margin-bottom: 20px;
-  border-radius: 8px; /* Agregar bordes redondeados */
+  border-radius: 8px; /* Agregar bordes redondeados 
   transition: transform 0.3s ease-in-out;
 
   &:hover {
-    transform: scale(1.05); /* Aumentar ligeramente el tamaño al hacer hover */
+    transform: scale(1.05); /* Aumentar ligeramente el tamaño al hacer hover 
   }
 }
 
 .field-card h2 {
-  font-size: 20px; /* Reducir el tamaño del encabezado */
+  font-size: 20px; /* Reducir el tamaño del encabezado 
   color: #0077b6;
-  margin-bottom: 10px; /* Añadir espacio entre el encabezado y el resto del contenido */
+  margin-bottom: 10px; /* Añadir espacio entre el encabezado y el resto del contenido 
 }
 
 .field-card p {
-  font-size: 14px; /* Reducir el tamaño del texto */
-  color: #666666; /* Utilizar un color de texto más suave */
+  font-size: 14px; /* Reducir el tamaño del texto 
+  color: #666666; /* Utilizar un color de texto más suave 
   margin-bottom: 8px;
 }
 
@@ -49,5 +68,5 @@
   width: 100%;
   height: 200px;
   object-fit: cover;
-  border-radius: 8px; /* Agregar bordes redondeados a la imagen */
-}
+  border-radius: 8px; /* Agregar bordes redondeados a la imagen 
+} */

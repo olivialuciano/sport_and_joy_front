@@ -1,6 +1,3 @@
-
-
-
 import React, { useState } from "react";
 import "./FieldDetail.css";
 import { Header } from "../Header/Header";
@@ -8,16 +5,8 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useUser } from "../../services/Authentication/authentication.context";
 
 const FieldDetail = (props) => {
-  const {
-    name,
-    location,
-    image,
-    description,
-    sport,
-    lockerRoom,
-    bar,
-    price,
-  } = props;
+  const { name, location, image, description, sport, lockerRoom, bar, price } =
+    props;
 
   const { id } = useParams();
   const navigate = useNavigate();
@@ -31,8 +20,6 @@ const FieldDetail = (props) => {
   const [editedLockerRoom, setEditedLockerRoom] = useState(lockerRoom);
   const [editedBar, setEditedBar] = useState(bar);
   const [editedPrice, setEditedPrice] = useState(price);
-
-
 
   const [showConfirmation, setShowConfirmation] = useState(false);
 
@@ -115,8 +102,6 @@ const FieldDetail = (props) => {
     //   )}
     // </div>
     // </>
-
-
 
     // con boton editar y poder editar
 
@@ -222,7 +207,3 @@ const FieldDetail = (props) => {
 };
 
 export default FieldDetail;
-
-
-
-
