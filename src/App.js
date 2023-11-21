@@ -14,7 +14,10 @@ import Reservations from "./components/Reservations/Reservations";
 import FieldDetail from "./components/FieldDetail/FieldDetail";
 import Users from "./components/Users/Users";
 import AdminView from "./components/AdminView/AdminView";
-import { UserProvider, useUser } from "./services/Authentication/authentication.context";
+import {
+  UserProvider,
+  useUser,
+} from "./services/Authentication/authentication.context";
 
 const App = () => {
   const { user } = useUser();
@@ -30,7 +33,16 @@ const App = () => {
     },
     {
       path: "/dashboard",
-      element: user.role === "player" || user.role === "owner" ? <Dashboard /> : <Navigate to="/adminView" />,
+      element:
+        user.role === "player" || user.role === "owner" ? (
+          <Dashboard />
+        ) : (
+          <Navigate to="/adminView" />
+        ),
+    },
+    {
+      path: "/allFields",
+      element: <Dashboard />,
     },
     {
       path: "/profile",
@@ -50,13 +62,12 @@ const App = () => {
     },
     {
       path: "/adminView",
-      element: <AdminView />, 
+      element: <AdminView />,
     },
     // {
     //   path: "/admin",
     //   element: user.role === "admin" ? <AdminView /> : <Navigate to="/dashboard" />,
     // },
-
   ]);
 
   return (

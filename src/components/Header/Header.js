@@ -7,7 +7,7 @@ import { useUser } from "../../services/Authentication/authentication.context";
 
 export const Header = () => {
   const navigate = useNavigate();
-  const { user,updateUserRole } = useUser();
+  const { user, updateUserRole } = useUser();
 
   // const [userRole, setUserRole] = useState("");
 
@@ -19,16 +19,15 @@ export const Header = () => {
   //   setUserRole("admin");  //Puedes tener "player" u "owner" también
   // }, []);
 
-
   // const buttonNavigateProfile = () => {
   //   navigate("/profile");
   // };
   const buttonNavigateReservations = () => {
     navigate("/reservations");
   };
-//   const buttonNavigateUsers = () => {
-//     navigate("/users");
-// };
+  //   const buttonNavigateUsers = () => {
+  //     navigate("/users");
+  // };
   const navigateDashboard = () => {
     navigate("/dashboard");
   };
@@ -46,57 +45,69 @@ export const Header = () => {
   const handleLogout = () => {
     // Realiza cualquier lógica de cierre de sesión que necesites
     // Por ahora, simplemente actualiza el rol y navega a /signin
-    updateUserRole('');
-    navigate('/signin');
+    updateUserRole("");
+    navigate("/signin");
   };
 
   return (
-  //   <div className="header">
-  //     <button className="title-button" onClick={navigateDashboard}>Sport&Joy</button>
-  //     <div className="dropdown">
-  //       <div className="user">
-  //         <img className="user-picture" src={avatarImage} alt="avatar" />
-  //         <button className="user-button">Olivia</button>
-  //       </div>
-  //       <div className="dropdown-content">
-  //         <button className="dropdown-buttons" onClick={buttonNavigateProfile}>Perfil</button>
-  //         <button className="dropdown-buttons" onClick={buttonNavigateReservations}>Reservas</button>
-  //         <button className="dropdown-buttons">Cerrar sesión</button>
-  //       </div>
-  //     </div>
-  //   </div>
-  // );
-  <div className="header">
-    <button className="title-button" onClick={navigateDashboard}>
-      Sport&Joy
-    </button>
-    {user.role === "admin" ? (
-      // Si el usuario es admin, mostrar el botón y el icono de usuario
-      <div className="user">
-        <img className="user-picture" src={avatarImage} alt="avatar" onClick={buttonNavigateProfile} />
-        <button className="user-button" onClick={buttonNavigateProfile}>
-          Olivia
-        </button>
-      </div>
-    ) : (
-      // Si el usuario no es admin, mostrar el menú desplegable
-      <div className="dropdown">
+    //   <div className="header">
+    //     <button className="title-button" onClick={navigateDashboard}>Sport&Joy</button>
+    //     <div className="dropdown">
+    //       <div className="user">
+    //         <img className="user-picture" src={avatarImage} alt="avatar" />
+    //         <button className="user-button">Olivia</button>
+    //       </div>
+    //       <div className="dropdown-content">
+    //         <button className="dropdown-buttons" onClick={buttonNavigateProfile}>Perfil</button>
+    //         <button className="dropdown-buttons" onClick={buttonNavigateReservations}>Reservas</button>
+    //         <button className="dropdown-buttons">Cerrar sesión</button>
+    //       </div>
+    //     </div>
+    //   </div>
+    // );
+    <div className="header">
+      <button className="title-button" onClick={navigateDashboard}>
+        Sport&Joy
+      </button>
+      {user.role === "admin" ? (
+        // Si el usuario es admin, mostrar el botón y el icono de usuario
         <div className="user">
-          <img className="user-picture" src={avatarImage} alt="avatar" />
-          <button className="user-button">Olivia</button>
-        </div>
-        <div className="dropdown-content">
-          <button className="dropdown-buttons" onClick={buttonNavigateProfile}>
-            Perfil
+          <img
+            className="user-picture"
+            src={avatarImage}
+            alt="avatar"
+            onClick={buttonNavigateProfile}
+          />
+          <button className="user-button" onClick={buttonNavigateProfile}>
+            Olivia
           </button>
-          <button className="dropdown-buttons" onClick={buttonNavigateReservations}>
-            Reservas
-          </button>
-          <button onClick={handleLogout} className="dropdown-buttons">Cerrar sesión</button>
         </div>
-      </div>
-    )}
-  </div>
+      ) : (
+        // Si el usuario no es admin, mostrar el menú desplegable
+        <div className="dropdown">
+          <div className="user">
+            <img className="user-picture" src={avatarImage} alt="avatar" />
+            <button className="user-button">Olivia</button>
+          </div>
+          <div className="dropdown-content">
+            <button
+              className="dropdown-buttons"
+              onClick={buttonNavigateProfile}
+            >
+              Perfil
+            </button>
+            <button
+              className="dropdown-buttons"
+              onClick={buttonNavigateReservations}
+            >
+              Reservas
+            </button>
+            <button onClick={handleLogout} className="dropdown-buttons">
+              Cerrar sesión
+            </button>
+          </div>
+        </div>
+      )}
+    </div>
   );
-
 };
