@@ -1,12 +1,17 @@
 import React, { useEffect, useState } from "react";
 import "./Profile.css";
 import { Header } from "../Header/Header";
+import { useNavigate } from "react-router-dom";
+import { useUser } from "../../services/Authentication/authentication.context";
 
 const Profile = () => {
   const [isEditing, setIsEditing] = useState(false);
   const [name, setName] = useState("Juan");
   const [lastname, setLastname] = useState("Pérez");
   const [email, setEmail] = useState("juan.perez@gmail.com");
+  const navigate = useNavigate();
+  const { user, updateUserRole } = useUser();
+
 
   const handleEditClick = () => {
     setIsEditing(true);
@@ -24,6 +29,12 @@ const Profile = () => {
     } else if (e.target.name === "email") {
       setEmail(e.target.value);
     }
+  };
+  const handleLogout = () => {
+    // Realiza cualquier lógica de cierre de sesión que necesites
+    // Por ahora, simplemente actualiza el rol y navega a /signin
+    updateUserRole('');
+    navigate('/signin');
   };
 
   return (
@@ -80,6 +91,9 @@ const Profile = () => {
                 {/* <span>{email}</span> */}
               </div>
               <button onClick={handleEditClick}>Editar</button>
+              {user.role === "admin" && (
+                <button onClick={handleLogout}>Cerrar sesión</button>
+              )}
             </div>
           )}
         </div>

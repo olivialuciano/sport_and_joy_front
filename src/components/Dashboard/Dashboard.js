@@ -6,6 +6,7 @@ import { Header } from "../Header/Header";
 import { Search } from "../Search/Search";
 import { Filter } from "../Filter/Filter";
 import { useNavigate } from "react-router-dom";
+import { useUser } from "../../services/Authentication/authentication.context";
 
 const Dashboard = () => {
   //const [fields, setFields] = useState([]);
@@ -30,6 +31,7 @@ const Dashboard = () => {
   // }, []);
   
   const [selectedCancha,setSelectedCancha] = useState(null);
+  const { user } = useUser(); 
   const navigate = useNavigate();
   const canchas = [
     {
@@ -37,6 +39,34 @@ const Dashboard = () => {
       nombre: 'Cancha 1',
       ubicacion: 'Ubicación 1',
       precio: '$20/hora',
+      imagen: 'https://via.placeholder.com/150',
+    },
+    {
+      id: 2,
+      nombre: 'Cancha 2',
+      ubicacion: 'Ubicación 2',
+      precio: '$25/hora',
+      imagen: 'https://via.placeholder.com/150',
+    },
+    {
+      id: 2,
+      nombre: 'Cancha 2',
+      ubicacion: 'Ubicación 2',
+      precio: '$25/hora',
+      imagen: 'https://via.placeholder.com/150',
+    },
+    {
+      id: 2,
+      nombre: 'Cancha 2',
+      ubicacion: 'Ubicación 2',
+      precio: '$25/hora',
+      imagen: 'https://via.placeholder.com/150',
+    },
+    {
+      id: 2,
+      nombre: 'Cancha 2',
+      ubicacion: 'Ubicación 2',
+      precio: '$25/hora',
       imagen: 'https://via.placeholder.com/150',
     },
     {
@@ -55,16 +85,32 @@ const Dashboard = () => {
   };
 
   return (
+    // <>
+    //   <Header />
+    //   <Search />
+    //   <div className="container">
+    //     <div className="filter">
+    //       <Filter />
+    //     </div>
+    //     <div className="flex-fields">
+    //       {canchas.map((cancha) => (
+    //         <FieldCard key={cancha.id} cancha={cancha} onCardClick={handleCardClick}/>
+    //       ))}
+    //     </div>
+    //   </div>
+    // </>
     <>
       <Header />
       <Search />
       <div className="container">
-        <div className="filter">
-          <Filter />
-        </div>
+        {user.role !== 'owner' && (
+          <div className="filter">
+            <Filter />
+          </div>
+        )}
         <div className="flex-fields">
           {canchas.map((cancha) => (
-            <FieldCard key={cancha.id} cancha={cancha} onCardClick={handleCardClick}/>
+            <FieldCard key={cancha.id} cancha={cancha} onCardClick={handleCardClick} />
           ))}
         </div>
       </div>
