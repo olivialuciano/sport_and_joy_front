@@ -30,7 +30,7 @@ const App = () => {
     },
     {
       path: "/dashboard",
-      element: user.role === "player" ? <Dashboard /> : <Navigate to="/adminView" />,
+      element: user.role === "player" || user.role === "owner" ? <Dashboard /> : <Navigate to="/adminView" />,
     },
     {
       path: "/profile",

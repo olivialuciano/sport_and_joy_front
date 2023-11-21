@@ -7,7 +7,7 @@ import { useUser } from "../../services/Authentication/authentication.context";
 
 export const Header = () => {
   const navigate = useNavigate();
-  const { user } = useUser();
+  const { user,updateUserRole } = useUser();
 
   // const [userRole, setUserRole] = useState("");
 
@@ -20,14 +20,11 @@ export const Header = () => {
   // }, []);
 
 
-  const buttonNavigateProfile = () => {
-    navigate("/profile");
-  };
+  // const buttonNavigateProfile = () => {
+  //   navigate("/profile");
+  // };
   const buttonNavigateReservations = () => {
     navigate("/reservations");
-  };
-  const buttonNavigateAdminView = () => {
-    navigate("/adminview");
   };
 //   const buttonNavigateUsers = () => {
 //     navigate("/users");
@@ -36,114 +33,53 @@ export const Header = () => {
     navigate("/dashboard");
   };
 
+  const buttonNavigateProfile = () => {
+    if (user.role === "admin") {
+      // Si el usuario es admin, dirigir directamente a la página de perfil (Profile.js)
+      navigate("/profile");
+    } else {
+      // Si el usuario no es admin, mostrar el menú desplegable
+      // (puedes agregar aquí la lógica para mostrar el menú o cualquier otra acción necesaria)
+    }
+  };
 
+  const handleLogout = () => {
+    // Realiza cualquier lógica de cierre de sesión que necesites
+    // Por ahora, simplemente actualiza el rol y navega a /signin
+    updateUserRole('');
+    navigate('/signin');
+  };
 
   return (
-    <div className="header">
-      <button className="title-button" onClick={navigateDashboard}>Sport&Joy</button>
-      {/* <div className="adminView">
-        <button className="adminView-button" onClick={buttonNavigateAdminView}><span>AdminView</span></button>
-      </div> */}
-      <div className="dropdown">
-        <div className="user">
-          <img className="user-picture" src={avatarImage} alt="avatar" />
-          <button className="user-button">Olivia</button>
-        </div>
-        <div className="dropdown-content">
-          <button className="dropdown-buttons" onClick={buttonNavigateProfile}>Perfil</button>
-          <button className="dropdown-buttons" onClick={buttonNavigateReservations}>Reservas</button>
-          <button className="dropdown-buttons">Cerrar sesión</button>
-        </div>
-      </div>
-    </div>
-  );
-
-    //INTENTO DE MANEJO DE ROLES
-    // <div className="header">
-    //   <button className="title-button" onClick={navigateDashboard}>
-    //     Sport&Joy
-    //   </button>
-    //   {userRole === "admin" && (
-    //     <div className="adminView">
-    //       <button className="adminView-button" onClick={buttonNavigateAdminView}>
-    //         <span>AdminView</span>
-    //       </button>
-    //     </div>
-    //   )}
-    //   <div className="dropdown">
-    //     <div className="user">
-    //       <img className="user-picture" src={avatarImage} alt="avatar" />
-    //       <button className="user-button">Olivia</button>
-    //     </div>
-    //     <div className="dropdown-content">
-    //       <button className="dropdown-buttons" onClick={buttonNavigateProfile}>
-    //         Perfil
-    //       </button>
-    //       <button
-    //         className="dropdown-buttons"
-    //         onClick={buttonNavigateReservations}
-    //       >
-    //         Reservas
-    //       </button>
-    //       <button className="dropdown-buttons" onClick={buttonNavigateUsers}>
-    //         Cerrar sesión
-    //       </button>
-    //     </div>
-    //   </div>
-    // </div>
-
-    //2do intento 
   //   <div className="header">
-  //   <button className="title-button" onClick={navigateDashboard}>
-  //     Sport&Joy
-  //   </button>
-  //   {user.role === "admin" ? (
-    
-  //     <div className="adminView">
-  //       <button className="adminView-button" onClick={buttonNavigateAdminView}>
-  //         <span>AdminView</span>
-  //       </button>
-  //     </div>
-  //   ) : (
- 
+  //     <button className="title-button" onClick={navigateDashboard}>Sport&Joy</button>
   //     <div className="dropdown">
   //       <div className="user">
   //         <img className="user-picture" src={avatarImage} alt="avatar" />
   //         <button className="user-button">Olivia</button>
   //       </div>
   //       <div className="dropdown-content">
-  //         <button className="dropdown-buttons" onClick={buttonNavigateProfile}>
-  //           Perfil
-  //         </button>
-  //         <button className="dropdown-buttons" onClick={buttonNavigateReservations}>
-  //           Reservas
-  //         </button>
+  //         <button className="dropdown-buttons" onClick={buttonNavigateProfile}>Perfil</button>
+  //         <button className="dropdown-buttons" onClick={buttonNavigateReservations}>Reservas</button>
   //         <button className="dropdown-buttons">Cerrar sesión</button>
   //       </div>
   //     </div>
-  //   )}
-  // </div>
-
-//3er intento 
-
-/*{ <div className="header">
-      {user.role === "admin" && (
-        <button className="admin-button" onClick={buttonNavigateAdminView}>
-          Admin View
+  //   </div>
+  // );
+  <div className="header">
+    <button className="title-button" onClick={navigateDashboard}>
+      Sport&Joy
+    </button>
+    {user.role === "admin" ? (
+      // Si el usuario es admin, mostrar el botón y el icono de usuario
+      <div className="user">
+        <img className="user-picture" src={avatarImage} alt="avatar" onClick={buttonNavigateProfile} />
+        <button className="user-button" onClick={buttonNavigateProfile}>
+          Olivia
         </button>
-      )}
-
-      {user.role === "player" && (
-        <>
-          {}
-          <button className="player-button" onClick={navigateDashboard}>
-            Dashboard
-          </button>
-          {}
-        </>
-      )}
-
-      {}
+      </div>
+    ) : (
+      // Si el usuario no es admin, mostrar el menú desplegable
       <div className="dropdown">
         <div className="user">
           <img className="user-picture" src={avatarImage} alt="avatar" />
@@ -156,10 +92,11 @@ export const Header = () => {
           <button className="dropdown-buttons" onClick={buttonNavigateReservations}>
             Reservas
           </button>
-          <button className="dropdown-buttons">Cerrar sesión</button>
+          <button onClick={handleLogout} className="dropdown-buttons">Cerrar sesión</button>
         </div>
       </div>
-    </div>
-  ); }*/
+    )}
+  </div>
+  );
 
-      };
+};
