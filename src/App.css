@@ -1,3 +1,10 @@
 body {
   background-color: #f3ebe7;
 }
+
+.dark-theme {
+  background-color: #020c1a;
+  color: white;
+  height: 100vh;
+}
+

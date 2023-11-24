@@ -39,6 +39,7 @@ export const Header = () => {
     } else {
       // Si el usuario no es admin, mostrar el menú desplegable
       // (puedes agregar aquí la lógica para mostrar el menú o cualquier otra acción necesaria)
+      navigate("/profile")
     }
   };
 

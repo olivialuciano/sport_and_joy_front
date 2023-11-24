@@ -6,6 +6,7 @@ import { Search } from "../Search/Search";
 import { Filter } from "../Filter/Filter";
 import { useNavigate } from "react-router-dom";
 import { useUser } from "../../services/Authentication/authentication.context";
+import ToggleTheme from "../toggleTheme/ToggleTheme";
 
 const Dashboard = () => {
   //const [fields, setFields] = useState([]);
@@ -159,6 +160,7 @@ const Dashboard = () => {
     // </>
     <>
       <Header />
+      <ToggleTheme /> 
       <div className="dashboard-container">
         <div className="top-bar">
           {user.role !== "owner" && user.role !== "admin" && <Filter />}
