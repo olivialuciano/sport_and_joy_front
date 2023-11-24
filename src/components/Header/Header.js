@@ -19,9 +19,6 @@ export const Header = () => {
   //   setUserRole("admin");  //Puedes tener "player" u "owner" también
   // }, []);
 
-  // const buttonNavigateProfile = () => {
-  //   navigate("/profile");
-  // };
   const buttonNavigateReservations = () => {
     navigate("/reservations");
   };
@@ -33,15 +30,9 @@ export const Header = () => {
   };
 
   const buttonNavigateProfile = () => {
-    if (user.role === "admin") {
-      // Si el usuario es admin, dirigir directamente a la página de perfil (Profile.js)
-      navigate("/profile");
-    } else {
-      // Si el usuario no es admin, mostrar el menú desplegable
-      // (puedes agregar aquí la lógica para mostrar el menú o cualquier otra acción necesaria)
       navigate("/profile")
     }
-  };
+  
 
   const handleLogout = () => {
     // Realiza cualquier lógica de cierre de sesión que necesites
