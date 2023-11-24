@@ -18,9 +18,12 @@ import {
   UserProvider,
   useUser,
 } from "./services/Authentication/authentication.context";
+import { ThemeContext } from "./services/Authentication/theme.context";
+import ToggleTheme from "./components/toggleTheme/ToggleTheme";
 
 const App = () => {
   const { user } = useUser();
+  const { theme } = useContext(ThemeContext);
   const router = createBrowserRouter([
     { path: "/", element: <Navigate to="/signin" /> },
     {
@@ -71,9 +74,11 @@ const App = () => {
   ]);
 
   return (
+    <div className={theme === "dark" && "dark-theme"}>
     <UserProvider>
       <RouterProvider router={router} />
     </UserProvider>
+    </div>
   );
 };
 

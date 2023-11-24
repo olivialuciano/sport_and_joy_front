@@ -3,6 +3,7 @@ import { Header } from "../Header/Header";
 import "./AdminView.css";
 import { useNavigate } from "react-router-dom";
 import { useUser } from "../../services/Authentication/authentication.context";
+import ToggleTheme from "../toggleTheme/ToggleTheme";
 
 // export default AdminView => {
 //     const navigate = useNavigate();
@@ -47,6 +48,7 @@ const AdminView = () => {
   return (
     <>
       <Header />
+      <ToggleTheme/>
       <div className="body">
         <button className="users-button" onClick={buttonNavigateUsers}>
           Usuarios Activos

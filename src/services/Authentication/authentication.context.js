@@ -28,7 +28,7 @@ const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
   const [user, setUser] = useState({
-    role: "admin", // Puedes inicializar el rol con un valor predeterminado
+    role: "player", // Puedes inicializar el rol con un valor predeterminado
     // Otros datos del usuario
   });
 
