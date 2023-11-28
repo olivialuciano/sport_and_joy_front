@@ -22,7 +22,9 @@
 //   );
 // };
 
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
+import jwt_decode from 'jsonwebtoken';
+
 
 const UserContext = createContext();
 
@@ -32,12 +34,36 @@ export const UserProvider = ({ children }) => {
     // Otros datos del usuario
   });
 
+
+  // const updateUserRole = (newRole) => {
+  //   setUser((prevUser) => ({ ...prevUser, role: newRole }));
+  // };
+
+  useEffect(() => {
+    // Al montar el componente, intentar obtener el token del almacenamiento local
+    const token = localStorage.getItem('token');
+
+    if (token) {
+      try {
+        // Decodificar el token y extraer el rol
+        const decoded = jwt_decode(token);
+        const newRole = decoded.role;
+
+        // Actualizar el estado del usuario con el nuevo rol
+        setUser((prevUser) => ({ ...prevUser, role: newRole }));
+      } catch (error) {
+        // Manejar errores al decodificar el token si es necesario
+        console.error('Error al decodificar el token:', error);
+      }
+    }
+  }, []); // Este efecto se ejecutará solo al montar el componente
+
   const updateUserRole = (newRole) => {
     setUser((prevUser) => ({ ...prevUser, role: newRole }));
   };
 
   return (
-    <UserContext.Provider value={{ user, updateUserRole }}>
+    <UserContext.Provider value={{ user, updateUserRole  }}>
       {children}
     </UserContext.Provider>
   );
@@ -46,3 +72,6 @@ export const UserProvider = ({ children }) => {
 export const useUser = () => {
   return useContext(UserContext);
 };
+
+
+//npm install jsonwebtoken INSTALAR

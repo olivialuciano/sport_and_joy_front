@@ -2,8 +2,11 @@ import React, { useState } from "react";
 import { useRef } from "react";
 import { useNavigate } from "react-router";
 import "./Signin.css";
+import API_URL from "../../constants/config";
+import { useUser } from "../../services/Authentication/authentication.context";
 
 const Signin = () => {
+  const { updateUser } = useUser();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [emailError, setEmailError] = useState(false);
@@ -26,7 +29,7 @@ const Signin = () => {
     setPasswordError(password.length < 6);
   };
 
-  const signInHandler = () => {
+  const signInHandler = async () => {
     validateEmail();
     validatePassword();
 
@@ -42,8 +45,42 @@ const Signin = () => {
     }
 
     // Tu lógica de inicio de sesión aquí
-    navigate("/dashboard");
+
+    try {
+      const response = await fetch(`${API_URL} + "/api/User/authorization"`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: email,
+          password: password,
+        }),
+      });
+
+      if (response.ok) {
+        const { token, role } = await response.json();
+  
+        // Almacena el token en el localStorage
+        localStorage.setItem("token", token);
+  
+        // Actualiza el usuario en el contexto con el nuevo rol
+        updateUser({ role });
+  
+        console.log("Inicio de sesión exitoso");
+  
+        // Redirige a la página de dashboard
+        navigate("/dashboard");
+      } else {
+        // Manejar errores, por ejemplo, mostrar un mensaje de error
+        console.log("Error en el inicio de sesión");
+      }
+    } catch (error) {
+      console.error("Error en la solicitud:", error);
+    }
   };
+
+    // navigate("/dashboard");
 
   return (
     <div className="signin-container">
