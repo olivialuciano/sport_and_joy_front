@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./Dashboard.css";
 import FieldCard from "../FieldCard/FieldCard";
 import { Header } from "../Header/Header";
@@ -7,13 +7,13 @@ import { Filter } from "../Filter/Filter";
 import { useNavigate } from "react-router-dom";
 import { useUser } from "../../services/Authentication/authentication.context";
 import ToggleTheme from "../toggleTheme/ToggleTheme";
+import API_URL from "../../constants/config";
 
 const Dashboard = () => {
-  //const [fields, setFields] = useState([]);
-  //const BACKEND_URL = "http://localhost:8080";
+  // const [fields, setFields] = useState([]);
 
   // useEffect(() => {
-  //   fetch(BACKEND_URL + "/field", {
+  //   fetch(API_URL + "/api/Field/getall", {
   //     headers: {
   //       Accept: "application/json",
   //     },

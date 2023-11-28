@@ -2,8 +2,14 @@ import React, { useState } from "react";
 import { useRef } from "react";
 import { useNavigate } from "react-router";
 import "./Signup.css";
+import { useUser } from "../../services/Authentication/authentication.context";
+import API_URL from "../../constants/config";
 
 const Signup = () => {
+
+ 
+  const [image, setImage] = useState("");
+  const [lastname, setLastname] = useState("");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -33,7 +39,7 @@ const Signup = () => {
     setPasswordError(password.length < 6);
   };
 
-  const signUpHandler = () => {
+  const signUpHandler = async () => {
     validateName();
     validateEmail();
     validatePassword();
@@ -51,12 +57,56 @@ const Signup = () => {
     }
 
     // Tu lógica de registro aquí
-    navigate("/dashboard");
+    try {
+      const response = await fetch(`${API_URL} + "/api/User/registration"`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          Image: image,
+          FirstName: name,
+          LastName: lastname,
+          Email: email,
+          Password: password,
+          Role: 2
+        }),
+      });
+
+      if (response.ok) {
+        // Registro exitoso, puedes manejar la respuesta del servidor si es necesario
+        // const role = "player";  Reemplaza con la lógica para obtener el rol
+        // updateUser({ role });
+        // console.log("Registro exitoso");
+
+        // Redirige a la página de dashboard después del registro
+        navigate("/signin");
+      } else {
+        // Manejar errores, por ejemplo, mostrar un mensaje de error
+        console.log("Error en el registro");
+      }
+    } catch (error) {
+      console.error("Error en la solicitud:", error);
+    }
   };
+
+
+
+
+    // navigate("/dashboard");
 
   return (
     <div className="signup-container">
       <h2>Creá tu cuenta</h2>
+      <div className="input-container">
+        <label className="label">Imagen</label>
+        <input
+          placeholder=""
+          type="text"
+          value={image}
+          onChange={(e) => setImage(e.target.value)}
+        />
+      </div>
       <div className="input-container">
         <label className="label">Nombre</label>
         <input
@@ -69,6 +119,15 @@ const Signup = () => {
           onBlur={validateName}
         />
         {nameError && <p className="error-message">Ingrese su nombre</p>}
+      </div>
+      <div className="input-container">
+        <label className="label">Apellido</label>
+        <input
+          placeholder=""
+          type="text"
+          value={lastname}
+          onChange={(e) => setLastname(e.target.value)}
+        />
       </div>
       <div className="input-container">
         <label className="label">Mail</label>
