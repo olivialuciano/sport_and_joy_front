@@ -23,44 +23,45 @@
 // };
 
 import { createContext, useContext, useEffect, useState } from "react";
-import jwt_decode from 'jsonwebtoken';
+import { useJwt } from "react-jwt";
+
 
 
 const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
   const [user, setUser] = useState({
-    role: "player", // Puedes inicializar el rol con un valor predeterminado
+    role: "", // Puedes inicializar el rol con un valor predeterminado
     // Otros datos del usuario
   });
 
 
-  // const updateUserRole = (newRole) => {
-  //   setUser((prevUser) => ({ ...prevUser, role: newRole }));
-  // };
+  const { decodedToken } = useJwt(); // No es necesario pasar el token, useJwt lo extraerá automáticamente del almacenamiento local
 
   useEffect(() => {
-    // Al montar el componente, intentar obtener el token del almacenamiento local
-    const token = localStorage.getItem('token');
-
-    if (token) {
+    if (decodedToken) {
       try {
-        // Decodificar el token y extraer el rol
-        const decoded = jwt_decode(token);
-        const newRole = decoded.role;
-
+        console.log('Decoded Token:', decodedToken);
+  
+        // Extraer el rol del token decodificado
+        const newRole = decodedToken.role;
+  
         // Actualizar el estado del usuario con el nuevo rol
         setUser((prevUser) => ({ ...prevUser, role: newRole }));
       } catch (error) {
-        // Manejar errores al decodificar el token si es necesario
-        console.error('Error al decodificar el token:', error);
+        // Manejar errores al extraer el rol si es necesario
+        console.error('Error al extraer el rol del token:', error);
       }
     }
-  }, []); // Este efecto se ejecutará solo al montar el componente
+  }, [decodedToken]);
+  
 
   const updateUserRole = (newRole) => {
     setUser((prevUser) => ({ ...prevUser, role: newRole }));
   };
+
+
+  
 
   return (
     <UserContext.Provider value={{ user, updateUserRole  }}>
@@ -74,4 +75,4 @@ export const useUser = () => {
 };
 
 
-//npm install jsonwebtoken INSTALAR
+//npm install react-jwt

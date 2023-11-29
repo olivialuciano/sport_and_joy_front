@@ -9,17 +9,19 @@ const Signup = () => {
 
  
   const [image, setImage] = useState("");
-  const [lastname, setLastname] = useState("");
+  const [lastName, setLastname] = useState("");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [nameError, setNameError] = useState(false);
   const [emailError, setEmailError] = useState(false);
   const [passwordError, setPasswordError] = useState(false);
+  const [lastNameError, setLastNameError] = useState(false);
 
   const nameRef = useRef(null);
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
+  const lastNameRef = useRef(null);
 
   const navigate = useNavigate();
   const buttonNavigateSignup = () => {
@@ -28,6 +30,10 @@ const Signup = () => {
 
   const validateName = () => {
     setNameError(name.trim() === "");
+  };
+
+  const validateLastName = () => {
+    setLastNameError(name.trim() === "");
   };
 
   const validateEmail = () => {
@@ -43,16 +49,18 @@ const Signup = () => {
     validateName();
     validateEmail();
     validatePassword();
+    validateLastName();
 
-    if (nameError || emailError || passwordError) {
+    if (nameError || emailError || passwordError || lastNameError) {
       return;
     }
 
-    if (name === "" || email === "" || password === "") {
+    if (name === "" || email === "" || password === "" || lastName === "") {
       // Si algún campo está vacío, muestra el mensaje de error
       setNameError(true);
       setEmailError(true);
       setPasswordError(true);
+      setLastNameError(true);
       return;
     }
 
@@ -66,7 +74,7 @@ const Signup = () => {
         body: JSON.stringify({
           Image: image,
           FirstName: name,
-          LastName: lastname,
+          LastName: lastName,
           Email: email,
           Password: password,
           Role: 2
@@ -123,11 +131,15 @@ const Signup = () => {
       <div className="input-container">
         <label className="label">Apellido</label>
         <input
+          className={`input ${lastNameError ? "error" : ""}`}
           placeholder=""
           type="text"
-          value={lastname}
+          ref={lastNameRef}
+          value={lastName}
           onChange={(e) => setLastname(e.target.value)}
+          onBlur={validateLastName}
         />
+        {lastNameError && <p className="error-message">Ingrese su apellido</p>}
       </div>
       <div className="input-container">
         <label className="label">Mail</label>

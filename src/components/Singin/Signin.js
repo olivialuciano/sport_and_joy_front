@@ -6,7 +6,7 @@ import API_URL from "../../constants/config";
 import { useUser } from "../../services/Authentication/authentication.context";
 
 const Signin = () => {
-  const { updateUser } = useUser();
+  const { updateUserRole } = useUser();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [emailError, setEmailError] = useState(false);
@@ -47,7 +47,7 @@ const Signin = () => {
     // Tu lógica de inicio de sesión aquí
 
     try {
-      const response = await fetch(`${API_URL} + "/api/User/authorization"`, {
+      const response = await fetch(`${API_URL}/api/User/authorization`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -59,21 +59,23 @@ const Signin = () => {
       });
 
       if (response.ok) {
-        const { token, role } = await response.json();
-  
-        // Almacena el token en el localStorage
-        localStorage.setItem("token", token);
-  
-        // Actualiza el usuario en el contexto con el nuevo rol
-        updateUser({ role });
-  
-        console.log("Inicio de sesión exitoso");
-  
-        // Redirige a la página de dashboard
-        navigate("/dashboard");
+        try {
+          const { token, role } = await response.text();
+          // Almacena el token en el localStorage
+          localStorage.setItem("token", token);
+          console.log("Inicio de sesión exitoso");
+
+          // Actualiza el usuario en el contexto con el nuevo rol
+             updateUserRole({ role });
+
+          // No actualizamos el rol directamente aquí, ya que solo obtenemos el token
+          // Redirige a la página de dashboard
+          navigate("/dashboard");
+        } catch (jsonError) {
+          console.error("Error al analizar la respuesta JSON:", jsonError);
+        }
       } else {
-        // Manejar errores, por ejemplo, mostrar un mensaje de error
-        console.log("Error en el inicio de sesión");
+        console.log("Error en el inicio de sesión:", await response.text());
       }
     } catch (error) {
       console.error("Error en la solicitud:", error);

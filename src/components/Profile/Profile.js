@@ -91,7 +91,7 @@ const Profile = () => {
                 {/* <span>{email}</span> */}
               </div>
               <button onClick={handleEditClick}>Editar</button>
-              {user.role === "admin" && (
+              {user.role === 0 && (
                 <button onClick={handleLogout}>Cerrar sesión</button>
               )}
             </div>

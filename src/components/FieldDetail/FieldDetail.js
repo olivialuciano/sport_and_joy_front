@@ -180,13 +180,13 @@ const FieldDetail = (props) => {
                 <strong>Precio:</strong> {editedPrice} USD
               </p>
               {/* Mostrar el botón de edición solo si el rol es "owner" */}
-              {user.role === "owner" && (
+              {user.role === 1 && (
                 <button className="edit-button" onClick={handleEditClick}>
                   Editar
                 </button>
               )}
               {/* Mostrar el botón de reserva solo si el rol no es "owner" */}
-              {user.role !== "owner" && (
+              {user.role !== 1 && (
                 <button className="reserve-button" onClick={handleReserveClick}>
                   Reservar
                 </button>
