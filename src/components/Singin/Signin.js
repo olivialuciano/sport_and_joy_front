@@ -6,7 +6,7 @@ import API_URL from "../../constants/config";
 import { useUser } from "../../services/Authentication/authentication.context";
 
 const Signin = () => {
-  const { updateUserRole } = useUser();
+  const { updateUserRole } = useUser(0);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [emailError, setEmailError] = useState(false);
@@ -21,7 +21,7 @@ const Signin = () => {
   };
 
   const validateEmail = () => {
-    const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+    const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,4}$/;
     setEmailError(!emailPattern.test(email));
   };
 
@@ -60,13 +60,22 @@ const Signin = () => {
 
       if (response.ok) {
         try {
-          const { token, role } = await response.text();
+          const responseText = await response.text();
+          console.log("Response Text:", responseText);
+
+          // Intenta analizar la respuesta solo si es un formato JSON válido
+          // const responseData = JSON.parse(responseText);
+
+          const { token, role } = responseText;
+
           // Almacena el token en el localStorage
-          localStorage.setItem("token", token);
+          localStorage.setItem("token", responseText);
           console.log("Inicio de sesión exitoso");
+          console.log(responseText);
 
           // Actualiza el usuario en el contexto con el nuevo rol
-             updateUserRole({ role });
+          updateUserRole(role);
+          console.log(role);
 
           // No actualizamos el rol directamente aquí, ya que solo obtenemos el token
           // Redirige a la página de dashboard
@@ -82,7 +91,7 @@ const Signin = () => {
     }
   };
 
-    // navigate("/dashboard");
+  // navigate("/dashboard");
 
   return (
     <div className="signin-container">
@@ -98,7 +107,9 @@ const Signin = () => {
           onChange={(e) => setEmail(e.target.value)}
           onBlur={validateEmail}
         />
-        {emailError && <p className="error-message">Ingrese un correo electrónico válido</p>}
+        {emailError && (
+          <p className="error-message">Ingrese un correo electrónico válido</p>
+        )}
       </div>
       <div className="input-container">
         <label className="label">Contraseña</label>
@@ -111,7 +122,11 @@ const Signin = () => {
           onChange={(e) => setPassword(e.target.value)}
           onBlur={validatePassword}
         />
-        {passwordError && <p className="error-message">La contraseña debe tener al menos 6 caracteres</p>}
+        {passwordError && (
+          <p className="error-message">
+            La contraseña debe tener al menos 6 caracteres
+          </p>
+        )}
       </div>
       <button className="signin-button" type="button" onClick={signInHandler}>
         Ingresar
