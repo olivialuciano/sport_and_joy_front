@@ -37,7 +37,7 @@ const App = () => {
     {
       path: "/dashboard",
       element:
-        user.role === "player" || user.role === "owner" ? (
+        user.role === 2 || user.role === 1 ? (
           <Dashboard />
         ) : (
           <Navigate to="/adminView" />

@@ -163,7 +163,7 @@ const Dashboard = () => {
       <ToggleTheme /> 
       <div className="dashboard-container">
         <div className="top-bar">
-          {user.role !== "owner" && user.role !== "admin" && <Filter />}
+          {user.role !== 1 && user.role !== 0 && <Filter />}
         </div>
         <div className="dashboard-right">
           <Search />

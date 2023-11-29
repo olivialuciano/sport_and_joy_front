@@ -61,7 +61,7 @@ export const Header = () => {
       <button className="title-button" onClick={navigateDashboard}>
         Sport&Joy
       </button>
-      {user.role === "admin" ? (
+      {user.role === 0 ? (
         // Si el usuario es admin, mostrar el botón y el icono de usuario
         <div className="user">
           <img

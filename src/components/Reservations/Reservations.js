@@ -34,10 +34,10 @@ const Reservations = () => {
   return (
     <>
       <Header />
-      <h1>{user.role === "admin" ? "Todas las Reservas" : "Mis Reservas"}</h1>
+      <h1>{user.role === 0 ? "Todas las Reservas" : "Mis Reservas"}</h1>
       <Search />
       <div className="container">
-        {user.role === "admin" ? (
+        {user.role === 0 ? (
           // Lógica para mostrar todas las reservas (ajustar según la estructura de datos)
           <>
             <ReservationCard />
