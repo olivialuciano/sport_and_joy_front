@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./Profile.css";
 import { Header } from "../Header/Header";
 import { useNavigate } from "react-router-dom";
-import { useUser } from "../../services/Authentication/authentication.context";
+import { RoleContext } from "../../services/role.context";
 
 const Profile = () => {
   const [isEditing, setIsEditing] = useState(false);
@@ -10,8 +10,8 @@ const Profile = () => {
   const [lastname, setLastname] = useState("Pérez");
   const [email, setEmail] = useState("juan.perez@gmail.com");
   const navigate = useNavigate();
-  const { user, updateUserRole } = useUser();
-
+  // const { user, updateUserRole } = useUser();
+  const { role } = useContext(RoleContext);
 
   const handleEditClick = () => {
     setIsEditing(true);
@@ -33,8 +33,8 @@ const Profile = () => {
   const handleLogout = () => {
     // Realiza cualquier lógica de cierre de sesión que necesites
     // Por ahora, simplemente actualiza el rol y navega a /signin
-    updateUserRole('');
-    navigate('/signin');
+    // updateUserRole('');
+    navigate("/signin");
   };
 
   return (
@@ -91,7 +91,7 @@ const Profile = () => {
                 {/* <span>{email}</span> */}
               </div>
               <button onClick={handleEditClick}>Editar</button>
-              {user.role === 0 && (
+              {role === "ADMIN" && (
                 <button onClick={handleLogout}>Cerrar sesión</button>
               )}
             </div>

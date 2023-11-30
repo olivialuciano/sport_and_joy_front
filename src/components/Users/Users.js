@@ -11,18 +11,9 @@ const Users = () => {
       <h1>Usuarios activos</h1>
       <Search />
       <div className="container">
-        <UsersCard />
-        <UsersCard />
-        <UsersCard />
-        <UsersCard />
-        <UsersCard />
-        <UsersCard />
-        <UsersCard />
-        <UsersCard />
-        <UsersCard />
-        <UsersCard />
-        <UsersCard />
-        <UsersCard />
+        {Array.from({ length: 50 }, (_, index) => (
+          <UsersCard key={index} />
+        ))}
       </div>
     </>
   );

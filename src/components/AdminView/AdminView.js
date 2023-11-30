@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Header } from "../Header/Header";
 import "./AdminView.css";
 import { useNavigate } from "react-router-dom";
-import { useUser } from "../../services/Authentication/authentication.context";
 import ToggleTheme from "../toggleTheme/ToggleTheme";
+import { RoleContext } from "../../services/role.context";
+import NotFound from "../NotFound/NotFound";
 
 // export default AdminView => {
 //     const navigate = useNavigate();
@@ -29,9 +30,10 @@ import ToggleTheme from "../toggleTheme/ToggleTheme";
 //NUEVO CON ROLES
 
 const AdminView = () => {
-  const { user } = useUser(); // Accede al contexto de usuario
+  // const { user } = useUser(); // Accede al contexto de usuario
+  const { role } = useContext(RoleContext);
 
-  console.log("Role:", user.role); // Agrega esto para depurar
+  console.log("Role:", role);
   const navigate = useNavigate();
 
   const buttonNavigateUsers = () => {
@@ -45,26 +47,30 @@ const AdminView = () => {
     navigate("/allFields");
   };
 
-  return (
-    <>
-      <Header />
-      <ToggleTheme/>
-      <div className="body">
-        <button className="users-button" onClick={buttonNavigateUsers}>
-          Usuarios Activos
-        </button>
-        <button
-          className="reservations-button"
-          onClick={buttonNavigateReservations}
-        >
-          Reservas
-        </button>
-        <button className="allFields-button" onClick={buttonNavigateFields}>
-          Canchas activas
-        </button>
-      </div>
-    </>
-  );
+  if (role === "ADMIN") {
+    return (
+      <>
+        <Header />
+        <ToggleTheme />
+        <div className="body">
+          <button className="users-button" onClick={buttonNavigateUsers}>
+            Usuarios Activos
+          </button>
+          <button
+            className="reservations-button"
+            onClick={buttonNavigateReservations}
+          >
+            Reservas
+          </button>
+          <button className="allFields-button" onClick={buttonNavigateFields}>
+            Canchas activas
+          </button>
+        </div>
+      </>
+    );
+  } else {
+    return <h1>No tenés permisos suficientes para ver esta página...</h1>;
+  }
 };
 
 export default AdminView;

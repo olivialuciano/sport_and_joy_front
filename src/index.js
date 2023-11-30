@@ -3,14 +3,16 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 
 import App from "./App";
-import { UserProvider } from "./services/Authentication/authentication.context";
-import { ThemeContextProvider } from "./services/Authentication/theme.context";
+import { ThemeContextProvider } from "./services/theme.context";
+import { RoleContextProvider } from "./services/role.context";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-    <UserProvider>
-        <ThemeContextProvider>
-            <App />
-         </ThemeContextProvider>
-    </UserProvider>
+  <React.StrictMode>
+    <ThemeContextProvider>
+      <RoleContextProvider>
+        <App />
+      </RoleContextProvider>
+    </ThemeContextProvider>
+  </React.StrictMode>
 );

@@ -1,13 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./Header.css";
 import { useNavigate } from "react-router-dom";
+import { RoleContext } from "../../services/role.context";
 
-import avatarImage from "../../assets/images/default_avatar.jpg";
-import { useUser } from "../../services/Authentication/authentication.context";
+// import avatarImage from "../../assets/images/default_avatar.jpg";
+// import { useUser } from "../../services/Authentication/authentication.context";
 
 export const Header = () => {
+  const { role } = useContext(RoleContext);
+
+  console.log("Role:", role); // Agrega esto para depurar
   const navigate = useNavigate();
-  const { user, updateUserRole } = useUser();
+  // const { user, updateUserRole } = useUser();
 
   // const [userRole, setUserRole] = useState("");
 
@@ -30,14 +34,13 @@ export const Header = () => {
   };
 
   const buttonNavigateProfile = () => {
-      navigate("/profile")
-    }
-  
+    navigate("/profile");
+  };
 
   const handleLogout = () => {
     // Realiza cualquier lógica de cierre de sesión que necesites
     // Por ahora, simplemente actualiza el rol y navega a /signin
-    updateUserRole("");
+    // updateUserRole("");
     navigate("/signin");
   };
 
@@ -61,15 +64,15 @@ export const Header = () => {
       <button className="title-button" onClick={navigateDashboard}>
         Sport&Joy
       </button>
-      {user.role === 0 ? (
+      {role === "ADMIN" ? (
         // Si el usuario es admin, mostrar el botón y el icono de usuario
         <div className="user">
-          <img
+          {/* <img
             className="user-picture"
-            src={avatarImage}
+            // src={avatarImage}
             alt="avatar"
             onClick={buttonNavigateProfile}
-          />
+          /> */}
           <button className="user-button" onClick={buttonNavigateProfile}>
             Olivia
           </button>
@@ -78,7 +81,9 @@ export const Header = () => {
         // Si el usuario no es admin, mostrar el menú desplegable
         <div className="dropdown">
           <div className="user">
-            <img className="user-picture" src={avatarImage} alt="avatar" />
+            {/* <img className="user-picture" 
+            src={avatarImage}
+             alt="avatar" /> */}
             <button className="user-button">Olivia</button>
           </div>
           <div className="dropdown-content">
