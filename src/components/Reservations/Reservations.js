@@ -1,13 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import ReservationCard from "../ReservationCard/ReservationCard";
 import { Header } from "../Header/Header";
 import "./Reservations.css";
 import { Search } from "../Search/Search";
-import { useUser } from "../../services/Authentication/authentication.context";
+import { RoleContext } from "../../services/role.context";
 
 const Reservations = () => {
-
-
   // return (
   //   <>
   //     <Header />
@@ -29,15 +27,16 @@ const Reservations = () => {
   //     </div>
   //   </>
   // );
-  const { user } = useUser();
+  // const { user } = useUser();
+  const { role } = useContext(RoleContext);
 
   return (
     <>
       <Header />
-      <h1>{user.role === 0 ? "Todas las Reservas" : "Mis Reservas"}</h1>
+      <h1>{role === "ADMIN" ? "Todas las Reservas" : "Mis Reservas"}</h1>
       <Search />
       <div className="container">
-        {user.role === 0 ? (
+        {role === "ADMIN" ? (
           // Lógica para mostrar todas las reservas (ajustar según la estructura de datos)
           <>
             <ReservationCard />
@@ -73,7 +72,6 @@ const Reservations = () => {
       </div>
     </>
   );
-  
 };
 
 export default Reservations;

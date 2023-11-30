@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import "./FieldDetail.css";
 import { Header } from "../Header/Header";
 import { useNavigate, useParams } from "react-router-dom";
-import { useUser } from "../../services/Authentication/authentication.context";
+import { RoleContext } from "../../services/role.context";
 
 const FieldDetail = (props) => {
   const { name, location, image, description, sport, lockerRoom, bar, price } =
@@ -10,7 +10,9 @@ const FieldDetail = (props) => {
 
   const { id } = useParams();
   const navigate = useNavigate();
-  const { user } = useUser();
+  // const { user } = useUser();
+  const { role } = useContext(RoleContext);
+
   const [isEditing, setIsEditing] = useState(false);
 
   const [editedName, setEditedName] = useState(name);
@@ -180,13 +182,13 @@ const FieldDetail = (props) => {
                 <strong>Precio:</strong> {editedPrice} USD
               </p>
               {/* Mostrar el botón de edición solo si el rol es "owner" */}
-              {user.role === 1 && (
+              {role === "OWNER" && (
                 <button className="edit-button" onClick={handleEditClick}>
                   Editar
                 </button>
               )}
-              {/* Mostrar el botón de reserva solo si el rol no es "owner" */}
-              {user.role !== 1 && (
+              {/* Mostrar el botón de reserva si el rol es player */}
+              {role === "PLAYER" && (
                 <button className="reserve-button" onClick={handleReserveClick}>
                   Reservar
                 </button>

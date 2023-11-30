@@ -2,12 +2,9 @@ import React, { useState } from "react";
 import { useRef } from "react";
 import { useNavigate } from "react-router";
 import "./Signup.css";
-import { useUser } from "../../services/Authentication/authentication.context";
-import API_URL from "../../constants/config";
+import API_URL from "../../constants/api";
 
 const Signup = () => {
-
- 
   const [image, setImage] = useState("");
   const [lastName, setLastname] = useState("");
   const [name, setName] = useState("");
@@ -77,7 +74,7 @@ const Signup = () => {
           LastName: lastName,
           Email: email,
           Password: password,
-          Role: 2
+          Role: "PLAYER",
         }),
       });
 
@@ -98,10 +95,7 @@ const Signup = () => {
     }
   };
 
-
-
-
-    // navigate("/dashboard");
+  // navigate("/dashboard");
 
   return (
     <div className="signup-container">
@@ -152,7 +146,9 @@ const Signup = () => {
           onChange={(e) => setEmail(e.target.value)}
           onBlur={validateEmail}
         />
-        {emailError && <p className="error-message">Ingrese un correo electrónico válido</p>}
+        {emailError && (
+          <p className="error-message">Ingrese un correo electrónico válido</p>
+        )}
       </div>
       <div className="input-container">
         <label className="label">Contraseña</label>
@@ -165,12 +161,18 @@ const Signup = () => {
           onChange={(e) => setPassword(e.target.value)}
           onBlur={validatePassword}
         />
-        {passwordError && <p className="error-message">La contraseña debe tener al menos 6 caracteres</p>}
+        {passwordError && (
+          <p className="error-message">
+            La contraseña debe tener al menos 6 caracteres
+          </p>
+        )}
       </div>
       <button className="signin-button" type="button" onClick={signUpHandler}>
         Registrarse
       </button>
-      <p onClick={buttonNavigateSignup}>¿Ya tenés una cuenta? ¡Iniciá Sesión!</p>
+      <p onClick={buttonNavigateSignup}>
+        ¿Ya tenés una cuenta? ¡Iniciá Sesión!
+      </p>
     </div>
   );
 };

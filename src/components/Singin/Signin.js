@@ -1,16 +1,19 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useRef } from "react";
 import { useNavigate } from "react-router";
 import "./Signin.css";
-import API_URL from "../../constants/config";
-import { useUser } from "../../services/Authentication/authentication.context";
+import API_URL from "../../constants/api";
+import { jwtDecode } from "jwt-decode";
+import { RoleContext } from "../../services/role.context";
 
 const Signin = () => {
-  const { updateUserRole } = useUser(0);
+  // const { updateUserRole, setDecodedToken } = useUser(); // Asegúrate de tener una función setDecodedToken en el contexto
+  // const { updateUserRole } = useUser(0);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [emailError, setEmailError] = useState(false);
   const [passwordError, setPasswordError] = useState(false);
+  const { setRole } = useContext(RoleContext);
 
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
@@ -66,16 +69,24 @@ const Signin = () => {
           // Intenta analizar la respuesta solo si es un formato JSON válido
           // const responseData = JSON.parse(responseText);
 
-          const { token, role } = responseText;
+          // const { token, role } = responseText;
 
           // Almacena el token en el localStorage
           localStorage.setItem("token", responseText);
           console.log("Inicio de sesión exitoso");
           console.log(responseText);
 
-          // Actualiza el usuario en el contexto con el nuevo rol
-          updateUserRole(role);
+          // const role = localStorage.getItem(dasdwq)
+
+          const role = jwtDecode(responseText).role;
+
+          setRole(role);
+
           console.log(role);
+
+          // Actualiza el usuario en el contexto con el nuevo rol
+          // updateUserRole(role);
+          // console.log(role);
 
           // No actualizamos el rol directamente aquí, ya que solo obtenemos el token
           // Redirige a la página de dashboard

@@ -14,16 +14,15 @@ import Reservations from "./components/Reservations/Reservations";
 import FieldDetail from "./components/FieldDetail/FieldDetail";
 import Users from "./components/Users/Users";
 import AdminView from "./components/AdminView/AdminView";
-import {
-  UserProvider,
-  useUser,
-} from "./services/Authentication/authentication.context";
-import { ThemeContext } from "./services/Authentication/theme.context";
+import { ThemeContext } from "./services/theme.context";
 import ToggleTheme from "./components/toggleTheme/ToggleTheme";
+import NotFound from "./components/NotFound/NotFound";
+import { RoleContext } from "./services/role.context";
 
 const App = () => {
-  const { user } = useUser();
   const { theme } = useContext(ThemeContext);
+  const { role } = useContext(RoleContext);
+
   const router = createBrowserRouter([
     { path: "/", element: <Navigate to="/signin" /> },
     {
@@ -37,12 +36,13 @@ const App = () => {
     {
       path: "/dashboard",
       element:
-        user.role === 2 || user.role === 1 ? (
+        role === "OWNER" || role === "PLAYER" ? (
           <Dashboard />
         ) : (
           <Navigate to="/adminView" />
         ),
     },
+
     {
       path: "/allFields",
       element: <Dashboard />,
@@ -67,17 +67,15 @@ const App = () => {
       path: "/adminView",
       element: <AdminView />,
     },
-    // {
-    //   path: "/admin",
-    //   element: user.role === "admin" ? <AdminView /> : <Navigate to="/dashboard" />,
-    // },
+    {
+      path: "*",
+      element: <NotFound />,
+    },
   ]);
 
   return (
     <div className={theme === "dark" && "dark-theme"}>
-    <UserProvider>
       <RouterProvider router={router} />
-    </UserProvider>
     </div>
   );
 };
