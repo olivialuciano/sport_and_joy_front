@@ -8,7 +8,7 @@ import "./App.css";
 import Signin from "./components/Singin/Signin";
 import Signup from "./components/Signup/Signup";
 import Dashboard from "./components/Dashboard/Dashboard";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import Profile from "./components/Profile/Profile";
 import Reservations from "./components/Reservations/Reservations";
 import FieldDetail from "./components/FieldDetail/FieldDetail";

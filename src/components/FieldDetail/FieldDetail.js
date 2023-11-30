@@ -1,8 +1,9 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./FieldDetail.css";
 import { Header } from "../Header/Header";
 import { useNavigate, useParams } from "react-router-dom";
 import { RoleContext } from "../../services/role.context";
+import API_URL from "../../constants/api";
 
 const FieldDetail = (props) => {
   const { name, location, image, description, sport, lockerRoom, bar, price } =
@@ -14,7 +15,6 @@ const FieldDetail = (props) => {
   const { role } = useContext(RoleContext);
 
   const [isEditing, setIsEditing] = useState(false);
-
   const [editedName, setEditedName] = useState(name);
   const [editedLocation, setEditedLocation] = useState(location);
   const [editedDescription, setEditedDescription] = useState(description);
@@ -24,6 +24,7 @@ const FieldDetail = (props) => {
   const [editedPrice, setEditedPrice] = useState(price);
 
   const [showConfirmation, setShowConfirmation] = useState(false);
+  const [field, setField] = useState();
 
   const handleReserveClick = () => {
     setShowConfirmation(true);
@@ -78,6 +79,25 @@ const FieldDetail = (props) => {
     }
   };
 
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+
+    fetch(`${API_URL}/api/Field/${id}`, {
+      headers: {
+        Accept: "application/json",
+        Authorization: `Bearer ${token}`, // Reemplaza con tu token
+      },
+    })
+      .then((response) => response.json())
+      .then((fieldData) => {
+        setField(fieldData);
+        console.log(fieldData);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
   return (
     // <>
     // <Header />
@@ -109,6 +129,7 @@ const FieldDetail = (props) => {
 
     <>
       <Header />
+
       <div className="field-detail field-card">
         <img src={image} alt={name} className="field-image" />
         <div className="field-info">
@@ -163,23 +184,26 @@ const FieldDetail = (props) => {
           ) : (
             // Mostrar información normal si no está en modo de edición
             <div>
+              {/* <img src={field.image} alt={field.name} /> */}
               <p>
-                <strong>Ubicación:</strong> {editedLocation}
+                <strong>Ubicación: {field.location}</strong> {editedLocation}
               </p>
               <p>
-                <strong>Descripción:</strong> {editedDescription}
+                <strong>Descripción: {field.description}</strong>{" "}
+                {editedDescription}
               </p>
               <p>
-                <strong>Deporte:</strong> {editedSport}
+                <strong>Deporte: {field.sport}</strong> {editedSport}
               </p>
               <p>
-                <strong>Vestuarios:</strong> {editedLockerRoom ? "Sí" : "No"}
+                <strong>Vestuarios: {field.lockerRoom}</strong>{" "}
+                {editedLockerRoom ? "Sí" : "No"}
               </p>
               <p>
-                <strong>Bar:</strong> {editedBar ? "Sí" : "No"}
+                <strong>Bar: {field.bar}</strong> {editedBar ? "Sí" : "No"}
               </p>
               <p>
-                <strong>Precio:</strong> {editedPrice} USD
+                <strong>Precio: falta jejejejejejje</strong> {editedPrice} USD
               </p>
               {/* Mostrar el botón de edición solo si el rol es "owner" */}
               {role === "OWNER" && (

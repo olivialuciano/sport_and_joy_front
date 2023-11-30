@@ -63,7 +63,7 @@ const Signup = () => {
 
     // Tu lógica de registro aquí
     try {
-      const response = await fetch(`${API_URL} + "/api/User/registration"`, {
+      const response = await fetch(`${API_URL}/api/User/registration`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
