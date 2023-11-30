@@ -14,6 +14,7 @@ const Signin = () => {
   const [emailError, setEmailError] = useState(false);
   const [passwordError, setPasswordError] = useState(false);
   const { setRole } = useContext(RoleContext);
+  const { setToken } = useContext(RoleContext);
 
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
@@ -80,7 +81,11 @@ const Signin = () => {
 
           const role = jwtDecode(responseText).role;
 
+          localStorage.setItem("role", role);
+
           setRole(role);
+
+          setToken(responseText);
 
           console.log(role);
 

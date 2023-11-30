@@ -1,17 +1,17 @@
 import React from "react";
 import "./FieldCard.css";
 
-const FieldCard = ({ cancha, onCardClick }) => {
+const FieldCard = ({ field, onCardClick }) => {
   const handleCardClick = () => {
-    onCardClick(cancha);
-  }
+    onCardClick(field);
+  };
   return (
     <div className="tarjeta" onClick={handleCardClick}>
-      <img className="imagen-cancha" src={cancha.imagen} alt={cancha.nombre} />
-      <div className="info-cancha">
-        <h2>{cancha.nombre}</h2>
-        <p className="ubicacion">{cancha.ubicacion}</p>
-        <p className="precio">{cancha.precio}</p>
+      <img className="imagen-field" src={field.image} alt={field.name} />
+      <div className="info-field">
+        <h2>{field.name}</h2>
+        <p className="ubicacion">{field.location}</p>
+        {/* <p className="precio">{field.Price}</p> */}
       </div>
     </div>
   );
