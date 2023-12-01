@@ -1,13 +1,15 @@
 import React from "react";
 import "./UsersCard.css";
 
-const UsersCard = () => {
+const UsersCard = ({user}) => {
+
+  console.log("User prop en UsersCard:", user);
   return (
     <div className="users-card">
       <div className="users-details">
-        <h3>nombre</h3>
-        <p>mail@trucho.com</p>
-        <p>id:120198319031</p>
+        <h3>{user.firstName} {user.lastName}</h3>
+        <p>{user.email}</p>
+        <p> Id: {user.id}</p>
       </div>
       <button className="delete-button">Eliminar</button>
     </div>
