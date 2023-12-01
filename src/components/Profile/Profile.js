@@ -3,12 +3,14 @@ import "./Profile.css";
 import { Header } from "../Header/Header";
 import { useNavigate } from "react-router-dom";
 import { RoleContext } from "../../services/role.context";
+import { jwtDecode } from "jwt-decode";
+import API_URL from "../../constants/api";
 
 const Profile = () => {
   const [isEditing, setIsEditing] = useState(false);
-  const [name, setName] = useState("Juan");
-  const [lastname, setLastname] = useState("Pérez");
-  const [email, setEmail] = useState("juan.perez@gmail.com");
+  const [name, setName] = useState("");
+  const [lastname, setLastname] = useState("");
+  const [email, setEmail] = useState("");
   const navigate = useNavigate();
   // const { user, updateUserRole } = useUser();
   const { role } = useContext(RoleContext);
@@ -37,6 +39,38 @@ const Profile = () => {
     navigate("/signin");
   };
 
+  useEffect(() => {
+    // Obtén el userId directamente del token al iniciar sesión
+    const token = localStorage.getItem("token");
+    if (token) {
+      try {
+        const decodedToken = jwtDecode(token);
+        const userId = decodedToken.sub;
+        const { given_name, family_name } = decodedToken;
+
+
+        // Realiza la solicitud al servidor para obtener los datos del usuario
+        fetch(`${API_URL}/api/User/get/${userId}`, {
+          headers: {
+            Accept: "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        })
+          .then((response) => response.json())
+          .then((userData) => {
+            setName(given_name);
+            setLastname(family_name);
+            setEmail(userData.email);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      } catch (error) {
+        console.error("Error al decodificar el token:", error);
+      }
+    }
+  }, []); // Asegúrate de que este sea un arreglo vacío
+
   return (
     <>
       <Header />
@@ -52,7 +86,7 @@ const Profile = () => {
                 <input
                   type="text"
                   name="nombre"
-                  //value={nombre}
+                  value={name}
                   onChange={handleInputChange}
                 />
               </div>
@@ -61,7 +95,7 @@ const Profile = () => {
                 <input
                   type="text"
                   name="apellido"
-                  //value={apellido}
+                  value={lastname}
                   onChange={handleInputChange}
                 />
               </div>
@@ -70,7 +104,7 @@ const Profile = () => {
                 <input
                   type="email"
                   name="email"
-                  //value={email}
+                  value={email}
                   onChange={handleInputChange}
                 />
               </div>
@@ -80,15 +114,15 @@ const Profile = () => {
             <div>
               <div>
                 <label>Nombre:</label>
-                {/* <span>{nombre}</span> */}
+                { <span>{name}</span> }
               </div>
               <div>
                 <label>Apellido:</label>
-                {/* <span>{apellido}</span> */}
+                { <span>{lastname}</span> }
               </div>
               <div>
                 <label>Email:</label>
-                {/* <span>{email}</span> */}
+                { <span>{email}</span> }
               </div>
               <button onClick={handleEditClick}>Editar</button>
               {role === "ADMIN" && (
