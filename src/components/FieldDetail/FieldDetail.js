@@ -24,7 +24,7 @@ const FieldDetail = (props) => {
   const [editedPrice, setEditedPrice] = useState(price);
 
   const [showConfirmation, setShowConfirmation] = useState(false);
-  const [field, setField] = useState();
+  const [field, setField] = useState({});
 
   const handleReserveClick = () => {
     setShowConfirmation(true);
