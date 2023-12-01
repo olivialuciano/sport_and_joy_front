@@ -1,13 +1,14 @@
 import React from "react";
 import "./ReservationCard.css";
 
-const ReservationCard = () => {
+const ReservationCard = ({reservation}) => {
+  console.log("User prop en ReservationCard:", reservation);
   return (
     <div className="reservation-card">
       <div className="reservation-details">
-        <h3>cancha xd</h3>
-        <p>Paraguay 1950</p>
-        <p>31/05/2024</p>
+        <h3>Cancha: {reservation.fieldId}</h3>
+        <p>Ubicacion:{reservation.location}</p>
+        <p>Del dia: {reservation.date}</p>
       </div>
       <button className="cancel-button">Cancelar</button>
     </div>
