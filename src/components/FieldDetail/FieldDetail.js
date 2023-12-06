@@ -30,9 +30,43 @@ const FieldDetail = (props) => {
     setShowConfirmation(true);
   };
 
-  const handleConfirmReservation = () => {
-    // Aquí puedes agregar la lógica para realizar la reserva
-    setShowConfirmation(false);
+  // const handleConfirmReservation = () => {
+  //    Aquí puedes agregar la lógica para realizar la reserva
+  //   setShowConfirmation(false);
+  // };
+
+  const handleConfirmReservation = async () => {
+    try {
+      const token = localStorage.getItem("token");
+
+      // Aquí puedes agregar la lógica para realizar la reserva
+      const response = await fetch(`${API_URL}/api/Reservation/create`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          Authorization: `Bearer ${token}`, // Reemplaza con tu token
+        },
+        body: JSON.stringify({
+          Date: new Date().toISOString(), // Puedes ajustar esto según tus necesidades
+          FieldId: id,
+          // Otros datos necesarios para la reserva
+        }),
+      });
+
+      if (response.ok) {
+        // La reserva fue exitosa, puedes manejarlo aquí
+        console.log("Reserva exitosa");
+        // Puedes redirigir al usuario a la página de confirmación o hacer cualquier otra acción necesaria.
+      } else {
+        // La reserva falló, puedes manejarlo aquí
+        console.error("Error al realizar la reserva");
+      }
+
+      setShowConfirmation(false);
+    } catch (error) {
+      console.error("Error al realizar la reserva:", error);
+    }
   };
 
   const handleCancelReservation = () => {

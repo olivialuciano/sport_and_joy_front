@@ -1,34 +1,40 @@
 
-
-  /* .field-detail {
+   .field-detail {
     display: flex;
     flex-direction: column;
     align-items: center;
     margin-top: 50px;
     width: 100%;
+    background-color: #fff; /* Fondo blanco */
+    padding: 20px; /* Añade un espacio interno */
+    border: 1px solid #ccc; /* Añade un borde */
+    border-radius: 10px; /* Añade esquinas redondeadas */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Añade una suave sombra */
   }
   
   .field-image {
     max-width: 100%;
     max-height: 400px;
     margin-bottom: 20px;
+    border-radius: 10px; /* Esquinas redondeadas para la imagen */
   }
   
   .field-info {
     text-align: center;
+    width: 80%; /* Ancho del contenedor de información */
   }
   
-  h2 {
+  .field-info h2 {
     font-size: 24px;
     margin: 10px 0;
   }
   
-  p {
+  .field-info p {
     font-size: 16px;
     margin-bottom: 10px;
   }
   
-  strong {
+  .field-info strong {
     font-weight: bold;
   }
   
@@ -71,81 +77,4 @@
   .field-detail:hover {
     transform: scale(1);
   }
-  
-  
-NUEVO */
-   
-
-.field-detail {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 50px;
-  width: 100%;
-}
-
-.field-image {
-  max-width: 100%;
-  max-height: 400px;
-  margin-bottom: 20px;
-}
-
-.field-info {
-  text-align: center;
-}
-
-h2 {
-  font-size: 24px;
-  margin: 10px 0;
-}
-
-p {
-  font-size: 16px;
-  margin-bottom: 10px;
-}
-
-strong {
-  font-weight: bold;
-}
-
-.field-price {
-  font-size: 20px;
-  margin-top: 10px;
-}
-
-.popup {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: #fff;
-  border: 1px solid #ccc;
-  padding: 20px;
-  z-index: 1000;
-  text-align: center;
-}
-
-.button-container {
-  margin-top: 20px;
-  text-align: center;
-}
-
-.reserve-button {
-  font-size: 24px;
-  padding: 15px 30px;
-  background-color: #0077b6;
-  color: #fff;
-  border: none;
-  cursor: pointer;
-  transition: background-color 0.3s ease-in-out;
-}
-
-.reserve-button:hover {
-  background-color: #005678;
-}
-
-.field-detail:hover {
-  transform: scale(1);
-}
-
   

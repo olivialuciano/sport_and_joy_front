@@ -6,22 +6,11 @@ import { RoleContext } from "../../services/role.context";
 // import avatarImage from "../../assets/images/default_avatar.jpg";
 // import { useUser } from "../../services/Authentication/authentication.context";
 
-export const Header = () => {
+export const Header = ({userName}) => {
   const { role } = useContext(RoleContext);
-
+  console.log('nombreee', userName)
   console.log("Role:", role); // Agrega esto para depurar
   const navigate = useNavigate();
-  // const { user, updateUserRole } = useUser();
-
-  // const [userRole, setUserRole] = useState("");
-
-  // useEffect(() => {
-  //   Simulando la obtención del rol desde el backend
-  //   Aquí deberías hacer una llamada al backend para obtener el rol del usuario
-  //   y luego establecerlo en el estado local.
-  //   Por ahora, lo simularemos con un valor estático.
-  //   setUserRole("admin");  //Puedes tener "player" u "owner" también
-  // }, []);
 
   const buttonNavigateReservations = () => {
     navigate("/reservations");
@@ -38,28 +27,13 @@ export const Header = () => {
   };
 
   const handleLogout = () => {
-    // Realiza cualquier lógica de cierre de sesión que necesites
-    // Por ahora, simplemente actualiza el rol y navega a /signin
-    // updateUserRole("");
+    // Limpiar el token del localStorage
+  localStorage.removeItem("token");
     navigate("/signin");
   };
+  
 
   return (
-    //   <div className="header">
-    //     <button className="title-button" onClick={navigateDashboard}>Sport&Joy</button>
-    //     <div className="dropdown">
-    //       <div className="user">
-    //         <img className="user-picture" src={avatarImage} alt="avatar" />
-    //         <button className="user-button">Olivia</button>
-    //       </div>
-    //       <div className="dropdown-content">
-    //         <button className="dropdown-buttons" onClick={buttonNavigateProfile}>Perfil</button>
-    //         <button className="dropdown-buttons" onClick={buttonNavigateReservations}>Reservas</button>
-    //         <button className="dropdown-buttons">Cerrar sesión</button>
-    //       </div>
-    //     </div>
-    //   </div>
-    // );
     <div className="header">
       <button className="title-button" onClick={navigateDashboard}>
         Sport&Joy
@@ -74,7 +48,7 @@ export const Header = () => {
             onClick={buttonNavigateProfile}
           /> */}
           <button className="user-button" onClick={buttonNavigateProfile}>
-            Olivia
+            {userName} vickyyy
           </button>
         </div>
       ) : (
@@ -84,7 +58,7 @@ export const Header = () => {
             {/* <img className="user-picture" 
             src={avatarImage}
              alt="avatar" /> */}
-            <button className="user-button">Olivia</button>
+            <button className="user-button">{userName} vickyyy </button>
           </div>
           <div className="dropdown-content">
             <button
@@ -106,5 +80,6 @@ export const Header = () => {
         </div>
       )}
     </div>
+
   );
 };

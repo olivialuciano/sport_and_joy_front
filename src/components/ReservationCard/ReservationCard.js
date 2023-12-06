@@ -6,8 +6,8 @@ const ReservationCard = ({reservation}) => {
   return (
     <div className="reservation-card">
       <div className="reservation-details">
-        <h3>Cancha: {reservation.fieldId}</h3>
-        <p>Ubicacion:{reservation.location}</p>
+        <h3>Cancha: {reservation.field.name}</h3>
+        <p>Ubicacion:{reservation.field.location}</p>
         <p>Del dia: {reservation.date}</p>
       </div>
       <button className="cancel-button">Cancelar</button>
