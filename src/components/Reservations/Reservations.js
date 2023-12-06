@@ -56,51 +56,50 @@ const Reservations = () => {
   //para traer las de player tmb
   
   useEffect(() => {
-    // Lógica para obtener las reservaciones desde el backend
-    if (role === "ADMIN") {
-      fetch(`${API_URL}/api/Reservation/getall`, {
-        headers: {
-          Accept: "application/json",
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          setReservations(data);
-        })
-        .catch((error) => {
-          console.error("Error fetching reservations:", error);
-        });
-    } else if (role === "PLAYER") {
-      // Obtener el ID del usuario directamente del token al iniciar sesión
-      const token = localStorage.getItem("token");
-      if (token) {
-        try {
-          const decodedToken = jwtDecode(token);
-          const userId = decodedToken.sub;
-
-          // Hacer la solicitud al endpoint específico para obtener las reservaciones del jugador
-          fetch(`${API_URL}/api/Reservation/${userId}`, {
+    const fetchReservations = async () => {
+      try {
+        if (role === "ADMIN") {
+          // Lógica para obtener todas las reservaciones como administrador
+          const response = await fetch(`${API_URL}/api/Reservation/getall`, {
             headers: {
               Accept: "application/json",
               Authorization: `Bearer ${localStorage.getItem("token")}`,
             },
-          })
-            .then((response) => response.json())
-            .then((data) => {
-              console.log("Player reservations:", data);
-            setReservations(data ? [data] : []); // Coloca la reserva del PLAYER en un array para que funcione con map
-            })
-            .catch((error) => {
-              console.error("Error fetching player reservations:", error);
-            });
-        } catch (error) {
-          console.error("Error decoding token:", error);
-        }
-      }
-    }
-  }, [role]);
+          });
+          const data = await response.json();
+          setReservations(data);
+        } else if (role === "PLAYER") {
+          // Obtener el ID del usuario directamente del token al iniciar sesión
+          const token = localStorage.getItem("token");
+          if (token) {
+            try {
+              const decodedToken = jwtDecode(token);
+              const userId = decodedToken.sub;
 
+              // Hacer la solicitud al endpoint específico para obtener las reservaciones del jugador
+              const response = await fetch(`${API_URL}/api/Reservation/myreservations`, {
+                headers: {
+                  Accept: "application/json",
+                  Authorization: `Bearer ${localStorage.getItem("token")}`,
+                },
+              });
+
+              const data = await response.json();
+              console.log("Player reservations:", data);
+
+              setReservations(data);
+            } catch (error) {
+              console.error("Error decoding token:", error);
+            }
+          }
+        }
+      } catch (error) {
+        console.error("Error fetching reservations:", error);
+      }
+    };
+
+    fetchReservations();
+  }, [role]);
 
   return (
     <>
