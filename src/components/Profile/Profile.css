@@ -47,3 +47,15 @@
 .perfil-datos button:hover {
   background-color: #217dbb;
 }
+
+.userpic-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.userpic {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+}

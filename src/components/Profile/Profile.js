@@ -5,15 +5,20 @@ import { useNavigate } from "react-router-dom";
 import { RoleContext } from "../../services/role.context";
 import { jwtDecode } from "jwt-decode";
 import API_URL from "../../constants/api";
+import avatarImage from "../../assets/images/default_avatar.jpg";
 
 const Profile = () => {
   const [isEditing, setIsEditing] = useState(false);
   const [name, setName] = useState("");
   const [lastname, setLastname] = useState("");
   const [email, setEmail] = useState("");
+  const [image, setImage] = useState("");
   const navigate = useNavigate();
   const { role } = useContext(RoleContext);
   const [userData, setUserData] = useState({});
+
+
+  const imageUrl = image ? image : avatarImage;
 
 
 
@@ -37,6 +42,7 @@ const Profile = () => {
         firstName: name,
         lastName: lastname,
         email: email,
+        image:image,
       }),
     })
       .then((response) => {
@@ -65,6 +71,8 @@ const Profile = () => {
       setLastname(e.target.value);
     } else if (e.target.name === "email") {
       setEmail(e.target.value);
+    } else if (e.target.name === "image") {
+      setImage(e.target.value);
     }
   };
 
@@ -97,6 +105,7 @@ const Profile = () => {
             setName(userData.firstName);
             setLastname(userData.lastName);
             setEmail(userData.email);
+            setImage(userData.image);
             setUserData(userData);
           })
           .catch((error) => {
@@ -114,7 +123,7 @@ const Profile = () => {
 
   return (
     <>
-      <Header userName = {name}/>
+      <Header/>
       <div className="perfil-container">
         <div className="perfil-header">
           <h1>Mi perfil</h1>
@@ -122,6 +131,15 @@ const Profile = () => {
         <div className="perfil-datos">
           {isEditing ? (
             <div>
+              <div>
+              <label>Cambia tu foto de perfil:</label>
+                <input
+                  type="text"
+                  name="image"
+                  value={imageUrl}
+                  onChange={handleInputChange}
+                />
+              </div>
               <div>
                 <label>Nombre:</label>
                 <input
@@ -153,6 +171,11 @@ const Profile = () => {
             </div>
           ) : (
             <div>
+              <div>
+            <div className="userpic-container">
+              <img className="userpic" src={imageUrl} alt="foto del usuario" />
+            </div>
+              </div>
               <div>
                 <label>Nombre:</label>
                  <span>{name}</span> 

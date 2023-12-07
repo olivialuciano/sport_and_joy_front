@@ -218,7 +218,7 @@ const FieldDetail = (props) => {
           ) : (
             // Mostrar información normal si no está en modo de edición
             <div>
-              {/* <img src={field.image} alt={field.name} /> */}
+              <img src={field.image} alt={field.name} className="field-image" />
               <p>
                 <strong>Ubicación: {field.location}</strong> {editedLocation}
               </p>
