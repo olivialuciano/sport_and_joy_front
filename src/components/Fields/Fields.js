@@ -13,7 +13,7 @@ export const Fields = ({ fields }) => {
       description={field.description}
       bar={field.bar}
       price={field.price}
-      sport={field.price}
+      sport={field.sport}
       lockerRoom={field.lockerRoom}
     />
   ));

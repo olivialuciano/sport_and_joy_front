@@ -50,11 +50,8 @@ const Users = () => {
       );
 
       if (response.ok) {
-        // Si la respuesta es exitosa, obtén el nuevo usuario creado
         const createdUser = await response.json();
-        // Agrega el nuevo usuario a la lista existente
         setUsers((prevUsers) => [...prevUsers, createdUser]);
-        // También puedes cerrar el popup después de agregar el usuario
         setShowAddUserPopup(false);
       } else {
         console.log("Error al crear usuario:", await response.text());

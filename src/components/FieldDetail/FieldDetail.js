@@ -4,6 +4,7 @@ import { Header } from "../Header/Header";
 import { useNavigate, useParams } from "react-router-dom";
 import { RoleContext } from "../../services/role.context";
 import API_URL from "../../constants/api";
+import { jwtDecode } from "jwt-decode";
 
 const FieldDetail = (props) => {
   const { name, location, image, description, sport, lockerRoom, bar, price } =
@@ -11,7 +12,6 @@ const FieldDetail = (props) => {
 
   const { id } = useParams();
   const navigate = useNavigate();
-  // const { user } = useUser();
   const { role } = useContext(RoleContext);
 
   const [isEditing, setIsEditing] = useState(false);
@@ -30,36 +30,28 @@ const FieldDetail = (props) => {
     setShowConfirmation(true);
   };
 
-  // const handleConfirmReservation = () => {
-  //    Aquí puedes agregar la lógica para realizar la reserva
-  //   setShowConfirmation(false);
-  // };
+  ///////CREAR RESERVA
 
   const handleConfirmReservation = async () => {
     try {
       const token = localStorage.getItem("token");
-
-      // Aquí puedes agregar la lógica para realizar la reserva
       const response = await fetch(`${API_URL}/api/Reservation/create`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json",
-          Authorization: `Bearer ${token}`, // Reemplaza con tu token
+          Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({
-          Date: new Date().toISOString(), // Puedes ajustar esto según tus necesidades
+          Date: new Date().toISOString(),
           FieldId: id,
           // Otros datos necesarios para la reserva
         }),
       });
 
       if (response.ok) {
-        // La reserva fue exitosa, puedes manejarlo aquí
         console.log("Reserva exitosa");
-        // Puedes redirigir al usuario a la página de confirmación o hacer cualquier otra acción necesaria.
       } else {
-        // La reserva falló, puedes manejarlo aquí
         console.error("Error al realizar la reserva");
       }
 
@@ -76,16 +68,12 @@ const FieldDetail = (props) => {
   const handleEditClick = () => {
     setIsEditing(true);
   };
-
   const handleSaveClick = () => {
-    // Aquí puedes agregar la lógica para guardar los cambios
     setIsEditing(false);
   };
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-
-    // Actualizar el estado según el campo que esté siendo editado
     switch (name) {
       case "name":
         setEditedName(value);
@@ -113,13 +101,14 @@ const FieldDetail = (props) => {
     }
   };
 
+  ////// GET 1 FIELD
   useEffect(() => {
     const token = localStorage.getItem("token");
 
     fetch(`${API_URL}/api/Field/${id}`, {
       headers: {
         Accept: "application/json",
-        Authorization: `Bearer ${token}`, // Reemplaza con tu token
+        Authorization: `Bearer ${token}`,
       },
     })
       .then((response) => response.json())
@@ -132,44 +121,52 @@ const FieldDetail = (props) => {
       });
   }, []);
 
+  // DELETE USER
+
+  // const handleDeleteUser = async (userId) => {
+  //   try {
+  //     const token = localStorage.getItem("token");
+
+  //     const response = await fetch(
+  //       `${API_URL}/api/User/${userId}/delete-admin`,
+  //       {
+  //         method: "DELETE",
+  //         headers: {
+  //           Accept: "application/json",
+  //           Authorization: `Bearer ${token}`,
+  //         },
+  //       }
+  //     );
+
+  //     if (response.ok) {
+  //       const updatedUsers = users.filter((user) => user.id !== userId);
+  //       setUsers(updatedUsers);
+  //     } else {
+  //       console.log("Error al eliminar usuario:", await response.text());
+  //     }
+  //   } catch (error) {
+  //     console.error("Error en la solicitud:", error);
+  //   }
+  // };
+
+  let sportName = "";
+  if (field.sport === 0) {
+    sportName = "Fútbol";
+  } else if (field.sport === 1) {
+    sportName = "Vóley";
+  } else if (field.sport === 2) {
+    sportName = "Tenis";
+  }
+
   return (
-    // <>
-    // <Header />
-    // <div className="field-detail field-card">
-    //   <img src={image} alt={name} className="field-image" />
-    //   <div className="field-info">
-    //     <h2> "Fulbito" {name}</h2>
-    //     <img src="https://lh3.googleusercontent.com/p/AF1QipMxtsQ0kqDdux6pRQCFKd61np6gDpx44KFx4UTq=w1080-h608-p-no-v0" alt="foto cancha"/>
-    //     <p><strong>Ubicación: "Sarmiento 5667"</strong> {location}</p>
-    //     <p><strong>Descripción: "cancha f5"</strong> {description}</p>
-    //     <p><strong>Deporte: "Futbol"</strong> {sport}</p>
-    //     <p><strong>Vestuarios: {true} </strong> {lockerRoom ? "Sí" : "No"}</p>
-    //     <p><strong>Bar: {false}</strong> {bar ? "Sí" : "No"}</p>
-    //     <p><strong>Precio: {30}</strong> {price} USD</p>
-    //     <button className="reserve-button" onClick={handleReserveClick}>Reservar</button>
-    //   </div>
-
-    //   {showConfirmation && (
-    //     <div className="popup">
-    //       <p>¿Seguro que desea reservar?</p>
-    //       <button onClick={handleConfirmReservation}>Sí</button>
-    //       <button onClick={handleCancelReservation}>No</button>
-    //     </div>
-    //   )}
-    // </div>
-    // </>
-
-    // con boton editar y poder editar
-
     <>
       <Header />
 
       <div className="field-detail field-card">
         <img src={image} alt={name} className="field-image" />
         <div className="field-info">
-          <h2>{editedName}</h2>
+          <h2> {editedName}</h2>
           {isEditing ? (
-            // Mostrar campos de entrada durante la edición
             <div>
               <label>Ubicación:</label>
               <input
@@ -216,9 +213,9 @@ const FieldDetail = (props) => {
               <button onClick={handleSaveClick}>Guardar</button>
             </div>
           ) : (
-            // Mostrar información normal si no está en modo de edición
             <div>
               <img src={field.image} alt={field.name} className="field-image" />
+              <h2>{field.name}</h2>
               <p>
                 <strong>Ubicación: {field.location}</strong> {editedLocation}
               </p>
@@ -227,7 +224,7 @@ const FieldDetail = (props) => {
                 {editedDescription}
               </p>
               <p>
-                <strong>Deporte: {field.sport}</strong> {editedSport}
+                <strong>Deporte: {sportName}</strong> {editedSport}
               </p>
               <p>
                 <strong>Vestuarios: {field.lockerRoom}</strong>{" "}
@@ -237,15 +234,19 @@ const FieldDetail = (props) => {
                 <strong>Bar: {field.bar}</strong> {editedBar ? "Sí" : "No"}
               </p>
               <p>
-                <strong>Precio: falta jejejejejejje</strong> {editedPrice} USD
+                <strong>Precio: $ {field.price}</strong> {editedPrice}
               </p>
-              {/* Mostrar el botón de edición solo si el rol es "owner" */}
-              {role === "OWNER" && (
-                <button className="edit-button" onClick={handleEditClick}>
-                  Editar
+              {role === "OWNER" ||
+                (role === "ADMIN" && (
+                  <button className="edit-button" onClick={handleEditClick}>
+                    Editar
+                  </button>
+                ))}
+              {role === "ADMIN" && (
+                <button className="delete-button" onClick={handleEditClick}>
+                  Eliminar
                 </button>
               )}
-              {/* Mostrar el botón de reserva si el rol es player */}
               {role === "PLAYER" && (
                 <button className="reserve-button" onClick={handleReserveClick}>
                   Reservar
