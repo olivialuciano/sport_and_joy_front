@@ -20,7 +20,6 @@ const UsersCard = ({ user, onDeleteUser }) => {
     roleText = "Rol desconocido";
   }
   const handleDeleteClick = () => {
-    // Llama a la función onDeleteUser con el ID del usuario
     onDeleteUser(user.id);
   };
 

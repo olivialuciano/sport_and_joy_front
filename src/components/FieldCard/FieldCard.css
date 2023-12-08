@@ -1,15 +1,16 @@
 .tarjeta {
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  overflow: hidden;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease-in-out;
-  margin: 5px;
-  margin-top: 5px;
-
-  &:hover {
-    transform: scale(1.05);
-  }
+  border: 3px solid #94c3dd;
+  border-radius: 5px;
+  padding: 10px;
+  margin: 10px;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: flex-start;
+  max-width: 300px;
+  flex-basis: calc(50% - 10px);
 }
 
 .imagen-field {
@@ -33,4 +34,39 @@ h2 {
   font-size: 1rem;
   color: #666;
   margin-bottom: 4px;
+}
+
+/* ------------------------------------- */
+
+#buttons {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
+}
+
+.delete-button {
+  background-color: #e74c3c;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px;
+  cursor: pointer;
+  margin-top: 10px;
+  margin-right: 10%;
+  margin-left: 10rem;
+}
+
+.delete-button:hover {
+  background-color: #c0392b;
+}
+
+.edit-button {
+  background-color: #9de73c;
+  color: #000000;
+  border: none;
+  border-radius: 5px;
+  padding: 10px;
+  cursor: pointer;
+  margin-top: 10px;
+  margin-left: 20%;
 }
