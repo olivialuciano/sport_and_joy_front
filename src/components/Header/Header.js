@@ -91,6 +91,39 @@ export const Header = () => {
             {name} 
           </button>
         </div>
+      ) : role === "OWNER" ? (
+        // Si el usuario no es admin, mostrar el menú desplegable
+        <div className="dropdown">
+          <div className="user">
+            <img className="user-picture" 
+            src={imageUrl}
+             alt="avatar" />
+            <button className="user-button">{name} </button>
+          </div>
+          <div className="dropdown-content">
+            <button
+              className="dropdown-buttons"
+              onClick={buttonNavigateProfile}
+            >
+              Perfil
+            </button>
+            <button
+              className="dropdown-buttons"
+              onClick={navigateDashboard}
+            >
+              Mis Canchas
+            </button>
+            <button
+              className="dropdown-buttons"
+              onClick={buttonNavigateReservations}
+            >
+              Reservas
+            </button>
+            <button onClick={handleLogout} className="dropdown-buttons">
+              Cerrar sesión
+            </button>
+          </div>
+        </div>
       ) : (
         // Si el usuario no es admin, mostrar el menú desplegable
         <div className="dropdown">

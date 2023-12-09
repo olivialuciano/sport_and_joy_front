@@ -70,7 +70,7 @@ const Reservations = () => {
           setReservations(data);
         } else if (role === "PLAYER") {
           // Obtener el ID del usuario directamente del token al iniciar sesión
-          const token = localStorage.getItem("token");
+          const token = localStorage.getItem("token");  
           if (token) {
             try {
               const decodedToken = jwtDecode(token);
@@ -92,8 +92,19 @@ const Reservations = () => {
               console.error("Error decoding token:", error);
             }
           }
-        }
-      } catch (error) {
+        } else if (role === "OWNER") {
+          // Lógica para obtener todas las reservaciones del owner
+          const response = await fetch(`${API_URL}/api/Reservation/allreservations-owner`, {
+            headers: {
+              Accept: "application/json",
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+          });
+          const data = await response.json();
+          setReservations(data);
+        } 
+      }
+      catch (error) {
         console.error("Error fetching reservations:", error);
       }
     };
@@ -104,7 +115,12 @@ const Reservations = () => {
   return (
     <>
       <Header />
-      <h1>{role === "ADMIN" ? "Todas las Reservas" : "Mis Reservas"}</h1>
+      <h1>
+      {role === "ADMIN" ? "Todas las Reservas" : 
+        role === "OWNER" ? "Reservas de mis canchas" :
+        "Mis Reservas"
+      }
+      </h1>
       <Search />
       <div className="container">
         {Array.isArray(reservations) && reservations.map((reservation) => (

@@ -65,12 +65,14 @@ const Dashboard = () => {
     }
   };
 
-  ///////GET ALL FIELDS
+  ///////GET ALL FIELDS para player y para owner
+
+  const endpoint = role === "PLAYER" ? "/api/Field/getall" : "/api/Field/get/myfields"; 
 
   useEffect(() => {
     const token = localStorage.getItem("token");
 
-    fetch(`${API_URL}/api/Field/getall`, {
+    fetch(`${API_URL}${endpoint}`, {
       headers: {
         Accept: "application/json",
         Authorization: `Bearer ${token}`,
@@ -88,7 +90,7 @@ const Dashboard = () => {
       .catch((error) => {
         console.log(error);
       });
-  }, []);
+  }, [role]);
 
   const navigate = useNavigate();
 
